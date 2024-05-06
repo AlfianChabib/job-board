@@ -1,0 +1,2184 @@
+{
+	"preferredClassificationOptions": [
+		{
+			"id": 1200,
+			"description": "Accounting",
+			"subClassifications": [
+				{
+					"id": 6140,
+					"description": "Accounts Officers/Clerks",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1303,
+					"description": "Accounts Payable",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6141,
+					"description": "Accounts Receivable/Credit Control",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6143,
+					"description": "Analysis & Reporting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6142,
+					"description": "Assistant Accountants",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6144,
+					"description": "Audit - External",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6145,
+					"description": "Audit - Internal",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6146,
+					"description": "Bookkeeping & Small Practice Accounting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6147,
+					"description": "Business Services & Corporate Advisory",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6148,
+					"description": "Company Secretaries",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6149,
+					"description": "Compliance & Risk",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6150,
+					"description": "Cost Accounting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6151,
+					"description": "Financial Accounting & Reporting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6152,
+					"description": "Financial Managers & Controllers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6153,
+					"description": "Forensic Accounting & Investigation",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6154,
+					"description": "Insolvency & Corporate Recovery",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6155,
+					"description": "Inventory & Fixed Assets",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6156,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6157,
+					"description": "Management Accounting & Budgeting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1468,
+					"description": "Payroll",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6158,
+					"description": "Strategy & Planning",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6159,
+					"description": "Systems Accounting & IT Audit",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6160,
+					"description": "Taxation",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6161,
+					"description": "Treasury",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6162,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6251,
+			"description": "Administration & Office Support",
+			"subClassifications": [
+				{
+					"id": 6252,
+					"description": "Administrative Assistants",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6253,
+					"description": "Client & Sales Administration",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6254,
+					"description": "Contracts Administration",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6255,
+					"description": "Data Entry & Word Processing",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6256,
+					"description": "Office Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6257,
+					"description": "PA, EA & Secretarial",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6258,
+					"description": "Receptionists",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6259,
+					"description": "Records Management & Document Control",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6260,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6304,
+			"description": "Advertising, Arts & Media",
+			"subClassifications": [
+				{
+					"id": 6305,
+					"description": "Agency Account Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6306,
+					"description": "Art Direction",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6307,
+					"description": "Editing & Publishing",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6308,
+					"description": "Event Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6309,
+					"description": "Journalism & Writing",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6310,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6311,
+					"description": "Media Strategy, Planning & Buying",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6312,
+					"description": "Performing Arts",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6313,
+					"description": "Photography",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6314,
+					"description": "Programming & Production",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6315,
+					"description": "Promotions",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6316,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1203,
+			"description": "Banking & Financial Services",
+			"subClassifications": [
+				{
+					"id": 6174,
+					"description": "Account & Relationship Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6175,
+					"description": "Analysis & Reporting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6177,
+					"description": "Banking - Business",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6178,
+					"description": "Banking - Corporate & Institutional",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6176,
+					"description": "Banking - Retail/Branch",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1352,
+					"description": "Client Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6179,
+					"description": "Compliance & Risk",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6180,
+					"description": "Corporate Finance & Investment Banking",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6181,
+					"description": "Credit",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1392,
+					"description": "Financial Planning",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1404,
+					"description": "Funds Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6182,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6183,
+					"description": "Mortgages",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6184,
+					"description": "Settlements",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6185,
+					"description": "Stockbroking & Trading",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6186,
+					"description": "Treasury",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6187,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1204,
+			"description": "Call Centre & Customer Service",
+			"subClassifications": [
+				{
+					"id": 6084,
+					"description": "Collections",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6085,
+					"description": "Customer Service - Call Centre",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6086,
+					"description": "Customer Service - Customer Facing",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6087,
+					"description": "Management & Support",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6088,
+					"description": "Sales - Inbound",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6089,
+					"description": "Sales - Outbound",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6090,
+					"description": "Supervisors/Team Leaders",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6091,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 7019,
+			"description": "CEO & General Management",
+			"subClassifications": [
+				{
+					"id": 7020,
+					"description": "Board Appointments",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 7021,
+					"description": "CEO",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 7022,
+					"description": "COO & MD",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 7023,
+					"description": "General/Business Unit Manager",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 7024,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6163,
+			"description": "Community Services & Development",
+			"subClassifications": [
+				{
+					"id": 6164,
+					"description": "Aged & Disability Support",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6165,
+					"description": "Child Welfare, Youth & Family Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6166,
+					"description": "Community Development",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6167,
+					"description": "Employment Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6168,
+					"description": "Fundraising",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6169,
+					"description": "Housing & Homelessness Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6170,
+					"description": "Indigenous & Multicultural Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6171,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6172,
+					"description": "Volunteer Coordination & Support",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6173,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1206,
+			"description": "Construction",
+			"subClassifications": [
+				{
+					"id": 6113,
+					"description": "Contracts Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1387,
+					"description": "Estimating",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6114,
+					"description": "Foreperson/Supervisors",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6115,
+					"description": "Health, Safety & Environment",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6116,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6117,
+					"description": "Planning & Scheduling",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6118,
+					"description": "Plant & Machinery Operators",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6119,
+					"description": "Project Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6120,
+					"description": "Quality Assurance & Control",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6121,
+					"description": "Surveying",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6122,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6076,
+			"description": "Consulting & Strategy",
+			"subClassifications": [
+				{
+					"id": 6077,
+					"description": "Analysts",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6078,
+					"description": "Corporate Development",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6079,
+					"description": "Environment & Sustainability Consulting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6080,
+					"description": "Management & Change Consulting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6081,
+					"description": "Policy",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6082,
+					"description": "Strategy & Planning",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6083,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6263,
+			"description": "Design & Architecture",
+			"subClassifications": [
+				{
+					"id": 6265,
+					"description": "Architectural Drafting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6264,
+					"description": "Architecture",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6267,
+					"description": "Fashion & Textile Design",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6268,
+					"description": "Graphic Design",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6266,
+					"description": "Illustration & Animation",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6269,
+					"description": "Industrial Design",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6270,
+					"description": "Interior Design",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6271,
+					"description": "Landscape Architecture",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6272,
+					"description": "Urban Design & Planning",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6273,
+					"description": "Web & Interaction Design",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6274,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6123,
+			"description": "Education & Training",
+			"subClassifications": [
+				{
+					"id": 6124,
+					"description": "Childcare & Outside School Hours Care",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6125,
+					"description": "Library Services & Information Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6126,
+					"description": "Management - Schools",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6127,
+					"description": "Management - Universities",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6128,
+					"description": "Management - Vocational",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6129,
+					"description": "Research & Fellowships",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6130,
+					"description": "Student Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6132,
+					"description": "Teaching - Early Childhood",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6133,
+					"description": "Teaching - Primary",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6134,
+					"description": "Teaching - Secondary",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6135,
+					"description": "Teaching - Tertiary",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6136,
+					"description": "Teaching - Vocational",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6131,
+					"description": "Teaching Aides & Special Needs",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6137,
+					"description": "Tutoring",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6138,
+					"description": "Workplace Training & Assessment",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6139,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1209,
+			"description": "Engineering",
+			"subClassifications": [
+				{
+					"id": 6022,
+					"description": "Aerospace Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6023,
+					"description": "Automotive Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6024,
+					"description": "Building Services Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6026,
+					"description": "Chemical Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6027,
+					"description": "Civil/Structural Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6028,
+					"description": "Electrical/Electronic Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6025,
+					"description": "Engineering Drafting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6029,
+					"description": "Environmental Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6030,
+					"description": "Field Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6031,
+					"description": "Industrial Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6032,
+					"description": "Maintenance",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6033,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6034,
+					"description": "Materials Handling Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6035,
+					"description": "Mechanical Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6036,
+					"description": "Process Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6038,
+					"description": "Project Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6037,
+					"description": "Project Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6039,
+					"description": "Supervisors",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6040,
+					"description": "Systems Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6041,
+					"description": "Water & Waste Engineering",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6042,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6205,
+			"description": "Farming, Animals & Conservation",
+			"subClassifications": [
+				{
+					"id": 6206,
+					"description": "Agronomy & Farm Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6207,
+					"description": "Conservation, Parks & Wildlife",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6208,
+					"description": "Farm Labour",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6209,
+					"description": "Farm Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6210,
+					"description": "Fishing & Aquaculture",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6211,
+					"description": "Horticulture",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6212,
+					"description": "Veterinary Services & Animal Welfare",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6213,
+					"description": "Winery & Viticulture",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6214,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1210,
+			"description": "Government & Defence",
+			"subClassifications": [
+				{
+					"id": 1314,
+					"description": "Air Force",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1322,
+					"description": "Army",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1378,
+					"description": "Emergency Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1409,
+					"description": "Government - Federal",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1410,
+					"description": "Government - Local",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1411,
+					"description": "Government - State",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1450,
+					"description": "Navy",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6359,
+					"description": "Police & Corrections",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6360,
+					"description": "Policy, Planning & Regulation",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6361,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1211,
+			"description": "Healthcare & Medical",
+			"subClassifications": [
+				{
+					"id": 6329,
+					"description": "Ambulance/Paramedics",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6330,
+					"description": "Chiropractic & Osteopathic",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1353,
+					"description": "Clinical/Medical Research",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1372,
+					"description": "Dental",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6331,
+					"description": "Dieticians",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1386,
+					"description": "Environmental Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6332,
+					"description": "General Practitioners",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6333,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6334,
+					"description": "Medical Administration",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6335,
+					"description": "Medical Imaging",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6336,
+					"description": "Medical Specialists",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6337,
+					"description": "Natural Therapies & Alternative Medicine",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6338,
+					"description": "Nursing - A&E, Critical Care & ICU",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6339,
+					"description": "Nursing - Aged Care",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6340,
+					"description": "Nursing - Community, Maternal & Child Health",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6341,
+					"description": "Nursing - Educators & Facilitators",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6342,
+					"description": "Nursing - General Medical & Surgical",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6343,
+					"description": "Nursing - High Acuity",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6344,
+					"description": "Nursing - Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6345,
+					"description": "Nursing - Midwifery, Neo-Natal, SCN & NICU",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6346,
+					"description": "Nursing - Paediatric & PICU",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6347,
+					"description": "Nursing - Psych, Forensic & Correctional Health",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6348,
+					"description": "Nursing - Theatre & Recovery",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6349,
+					"description": "Optical",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1467,
+					"description": "Pathology",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6350,
+					"description": "Pharmaceuticals & Medical Devices",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1470,
+					"description": "Pharmacy",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6352,
+					"description": "Physiotherapy, OT & Rehabilitation",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6351,
+					"description": "Psychology, Counselling & Social Work",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6370,
+					"description": "Residents & Registrars",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6353,
+					"description": "Sales",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6354,
+					"description": "Speech Therapy",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6355,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1212,
+			"description": "Hospitality & Tourism",
+			"subClassifications": [
+				{
+					"id": 1315,
+					"description": "Airlines",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1332,
+					"description": "Bar & Beverage Staff",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6052,
+					"description": "Chefs/Cooks",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6053,
+					"description": "Front Office & Guest Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1405,
+					"description": "Gaming",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1415,
+					"description": "Housekeeping",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6054,
+					"description": "Kitchen & Sandwich Hands",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6055,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6056,
+					"description": "Reservations",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1537,
+					"description": "Tour Guides",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1542,
+					"description": "Travel Agents/Consultants",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1549,
+					"description": "Waiting Staff",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6057,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6317,
+			"description": "Human Resources & Recruitment",
+			"subClassifications": [
+				{
+					"id": 6318,
+					"description": "Consulting & Generalist HR",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6319,
+					"description": "Industrial & Employee Relations",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6320,
+					"description": "Management - Agency",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6321,
+					"description": "Management - Internal",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6322,
+					"description": "Occupational Health & Safety",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6323,
+					"description": "Organisational Development",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6324,
+					"description": "Recruitment - Agency",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6325,
+					"description": "Recruitment - Internal",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6326,
+					"description": "Remuneration & Benefits",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6327,
+					"description": "Training & Development",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6328,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6281,
+			"description": "Information & Communication Technology",
+			"subClassifications": [
+				{
+					"id": 6282,
+					"description": "Architects",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6283,
+					"description": "Business/Systems Analysts",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6284,
+					"description": "Computer Operators",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6285,
+					"description": "Consultants",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6286,
+					"description": "Database Development & Administration",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6287,
+					"description": "Developers/Programmers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6288,
+					"description": "Engineering - Hardware",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6289,
+					"description": "Engineering - Network",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6290,
+					"description": "Engineering - Software",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6291,
+					"description": "Help Desk & IT Support",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6292,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6293,
+					"description": "Networks & Systems Administration",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6294,
+					"description": "Product Management & Development",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6295,
+					"description": "Programme & Project Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6296,
+					"description": "Sales - Pre & Post",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6297,
+					"description": "Security",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6298,
+					"description": "Team Leaders",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6299,
+					"description": "Technical Writing",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6300,
+					"description": "Telecommunications",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6301,
+					"description": "Testing & Quality Assurance",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6302,
+					"description": "Web Development & Production",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6303,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1214,
+			"description": "Insurance & Superannuation",
+			"subClassifications": [
+				{
+					"id": 6275,
+					"description": "Actuarial",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6276,
+					"description": "Assessment",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6277,
+					"description": "Brokerage",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1350,
+					"description": "Claims",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6278,
+					"description": "Fund Administration",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6279,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1499,
+					"description": "Risk Consulting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1524,
+					"description": "Superannuation",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1544,
+					"description": "Underwriting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1553,
+					"description": "Workers' Compensation",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6280,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1216,
+			"description": "Legal",
+			"subClassifications": [
+				{
+					"id": 6188,
+					"description": "Banking & Finance Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6190,
+					"description": "Construction Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6191,
+					"description": "Corporate & Commercial Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6189,
+					"description": "Criminal & Civil Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6192,
+					"description": "Environment & Planning Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6193,
+					"description": "Family Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6194,
+					"description": "Generalists - In-house",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6195,
+					"description": "Generalists - Law Firm",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6196,
+					"description": "Industrial Relations & Employment Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6197,
+					"description": "Insurance & Superannuation Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6198,
+					"description": "Intellectual Property Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1429,
+					"description": "Law Clerks & Paralegals",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6199,
+					"description": "Legal Practice Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1431,
+					"description": "Legal Secretaries",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6200,
+					"description": "Litigation & Dispute Resolution",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6201,
+					"description": "Personal Injury Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6202,
+					"description": "Property Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6203,
+					"description": "Tax Law",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6204,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6092,
+			"description": "Manufacturing, Transport & Logistics",
+			"subClassifications": [
+				{
+					"id": 6095,
+					"description": "Analysis & Reporting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6093,
+					"description": "Assembly & Process Work",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6094,
+					"description": "Aviation Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6096,
+					"description": "Couriers, Drivers & Postal Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6097,
+					"description": "Fleet Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6098,
+					"description": "Freight/Cargo Forwarding",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6099,
+					"description": "Import/Export & Customs",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6101,
+					"description": "Machine Operators",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6102,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6104,
+					"description": "Pattern Makers & Garment Technicians",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6105,
+					"description": "Pickers & Packers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6103,
+					"description": "Production, Planning & Scheduling",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6100,
+					"description": "Public Transport & Taxi Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6109,
+					"description": "Purchasing, Procurement & Inventory",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6106,
+					"description": "Quality Assurance & Control",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6110,
+					"description": "Rail & Maritime Transport",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6111,
+					"description": "Road Transport",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6107,
+					"description": "Team Leaders/Supervisors",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6108,
+					"description": "Warehousing, Storage & Distribution",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6112,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6008,
+			"description": "Marketing & Communications",
+			"subClassifications": [
+				{
+					"id": 6009,
+					"description": "Brand Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6010,
+					"description": "Digital & Search Marketing",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6011,
+					"description": "Direct Marketing & CRM",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6012,
+					"description": "Event Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6013,
+					"description": "Internal Communications",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6017,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6014,
+					"description": "Market Research & Analysis",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6015,
+					"description": "Marketing Assistants/Coordinators",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6016,
+					"description": "Marketing Communications",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6018,
+					"description": "Product Management & Development",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6019,
+					"description": "Public Relations & Corporate Affairs",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6020,
+					"description": "Trade Marketing",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6021,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6058,
+			"description": "Mining, Resources & Energy",
+			"subClassifications": [
+				{
+					"id": 6059,
+					"description": "Analysis & Reporting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6060,
+					"description": "Health, Safety & Environment",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6061,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6062,
+					"description": "Mining - Drill & Blast",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6063,
+					"description": "Mining - Engineering & Maintenance",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6064,
+					"description": "Mining - Exploration & Geoscience",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6066,
+					"description": "Mining - Operations",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6065,
+					"description": "Mining - Processing",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6073,
+					"description": "Natural Resources & Water",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6067,
+					"description": "Oil & Gas - Drilling",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6068,
+					"description": "Oil & Gas - Engineering & Maintenance",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6069,
+					"description": "Oil & Gas - Exploration & Geoscience",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6071,
+					"description": "Oil & Gas - Operations",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6070,
+					"description": "Oil & Gas - Production & Refinement",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6072,
+					"description": "Power Generation & Distribution",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6074,
+					"description": "Surveying",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6075,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1220,
+			"description": "Real Estate & Property",
+			"subClassifications": [
+				{
+					"id": 6371,
+					"description": "Administration",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6001,
+					"description": "Analysts",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6002,
+					"description": "Body Corporate & Facilities Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6003,
+					"description": "Commercial Sales, Leasing & Property Mgmt",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6004,
+					"description": "Residential Leasing & Property Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6005,
+					"description": "Residential Sales",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6006,
+					"description": "Retail & Property Development",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1546,
+					"description": "Valuation",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6007,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6043,
+			"description": "Retail & Consumer Products",
+			"subClassifications": [
+				{
+					"id": 6044,
+					"description": "Buying",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6045,
+					"description": "Management - Area/Multi-site",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6046,
+					"description": "Management - Department/Assistant",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6047,
+					"description": "Management - Store",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6048,
+					"description": "Merchandisers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6049,
+					"description": "Planning",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6050,
+					"description": "Retail Assistants",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6051,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6362,
+			"description": "Sales",
+			"subClassifications": [
+				{
+					"id": 6363,
+					"description": "Account & Relationship Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6364,
+					"description": "Analysis & Reporting",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6366,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6365,
+					"description": "New Business Development",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6367,
+					"description": "Sales Coordinators",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6368,
+					"description": "Sales Representatives/Consultants",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6369,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1223,
+			"description": "Science & Technology",
+			"subClassifications": [
+				{
+					"id": 6215,
+					"description": "Biological & Biomedical Sciences",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6216,
+					"description": "Biotechnology & Genetics",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6217,
+					"description": "Chemistry & Physics",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6218,
+					"description": "Environmental, Earth & Geosciences",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6219,
+					"description": "Food Technology & Safety",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6220,
+					"description": "Laboratory & Technical Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6221,
+					"description": "Materials Sciences",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6222,
+					"description": "Mathematics, Statistics & Information Sciences",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6223,
+					"description": "Modelling & Simulation",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6224,
+					"description": "Quality Assurance & Control",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6225,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6261,
+			"description": "Self Employment",
+			"subClassifications": [
+				{
+					"id": 6262,
+					"description": "Self Employment",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 6246,
+			"description": "Sport & Recreation",
+			"subClassifications": [
+				{
+					"id": 6247,
+					"description": "Coaching & Instruction",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6248,
+					"description": "Fitness & Personal Training",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6249,
+					"description": "Management",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6250,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		},
+		{
+			"id": 1225,
+			"description": "Trades & Services",
+			"subClassifications": [
+				{
+					"id": 1313,
+					"description": "Air Conditioning & Refrigeration",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1328,
+					"description": "Automotive Trades",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6226,
+					"description": "Bakers & Pastry Chefs",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6227,
+					"description": "Building Trades",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6228,
+					"description": "Butchers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1345,
+					"description": "Carpentry & Cabinet Making",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6229,
+					"description": "Cleaning Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6230,
+					"description": "Electricians",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6231,
+					"description": "Fitters, Turners & Machinists",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6232,
+					"description": "Floristry",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 1406,
+					"description": "Gardening & Landscaping",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6233,
+					"description": "Hair & Beauty Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6234,
+					"description": "Labourers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6235,
+					"description": "Locksmiths",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6236,
+					"description": "Maintenance & Handyperson Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6237,
+					"description": "Nannies & Babysitters",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6238,
+					"description": "Painters & Sign Writers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6240,
+					"description": "Plumbers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6239,
+					"description": "Printing & Publishing Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6241,
+					"description": "Security Services",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6242,
+					"description": "Tailors & Dressmakers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6243,
+					"description": "Technicians",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6244,
+					"description": "Welders & Boilermakers",
+					"__typename": "SubClassification"
+				},
+				{
+					"id": 6245,
+					"description": "Other",
+					"__typename": "SubClassification"
+				}
+			],
+			"__typename": "ClassificationOptions"
+		}
+	]
+}

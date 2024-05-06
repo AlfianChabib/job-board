@@ -10,12 +10,134 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Sample {
-  id        Int      @id @default(autoincrement())
-  name      String
-  code      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum UserType {
+  JobSeeker
+  Company
+}
 
-  @@map("samples") // if you want to use snake_case format
+model User {
+  id             Int             @id @default(autoincrement())
+  firstName      String?
+  lastName       String?
+  email          String          @unique
+  role           UserType        @default(JobSeeker)
+  UserProfile    UserProfile?
+  CompanyProfile CompanyProfile?
+  AuthDetail     AuthDetail?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@map("users")
+}
+
+model AuthDetail {
+  id               Int     @id @default(autoincrement())
+  email            String  @unique
+  hashPassword     String?
+  verified         Boolean @default(false)
+  verificationCode String?
+  user             User?   @relation(fields: [userId], references: [id])
+  userId           Int?    @unique
+}
+
+model UserProfile {
+  id                 Int                  @id @default(autoincrement())
+  user               User                 @relation(fields: [userId], references: [id])
+  userId             Int                  @unique
+  summary            String?
+  userSkill          UserSkill[]
+  userExperience     UserExperience[]
+  userClassification UserClassification[]
+  userEducation      UserEducation[]
+  userResume         UserResume?
+}
+
+model UserExperience {
+  id            Int         @id @default(autoincrement())
+  userProfile   UserProfile @relation(fields: [userProfileId], references: [id])
+  userProfileId Int
+  jobTitle      String
+  companyName   String
+  description   String?
+  started       DateTime
+  ended         DateTime?
+  stillInRole   Boolean     @default(false)
+}
+
+model UserSkill {
+  id            Int         @id @default(autoincrement())
+  UserProfile   UserProfile @relation(fields: [userProfileId], references: [id])
+  userProfileId Int
+  skillTitle    String
+}
+
+model UserClassification {
+  id                      Int         @id @default(autoincrement())
+  UserProfile             UserProfile @relation(fields: [userProfileId], references: [id])
+  userProfileId           Int
+  preferredClassification String
+  subClassification       String
+}
+
+model UserEducation {
+  id                    Int         @id @default(autoincrement())
+  UserProfile           UserProfile @relation(fields: [userProfileId], references: [id])
+  userProfileId         Int
+  courseOrQualification String
+  institution           String
+  isComplete            Boolean     @default(false)
+  finishedYear          String?
+  description           String?
+}
+
+model UserResume {
+  id            Int         @id @default(autoincrement())
+  UserProfile   UserProfile @relation(fields: [userProfileId], references: [id])
+  userProfileId Int         @unique
+}
+
+model CompanyProfile {
+  id          Int     @id @default(autoincrement())
+  user        User    @relation(fields: [userId], references: [id])
+  userId      Int     @unique
+  companyName String?
+  logo        String?
+  job         Job[]
+}
+
+model Job {
+  id                 Int                 @id @default(autoincrement())
+  CompanyProfile     CompanyProfile      @relation(fields: [companyProfileId], references: [id])
+  companyProfileId   Int
+  title              String
+  description        String
+  requirements       String
+  location           String
+  workType           String
+  classificationInfo ClassificationInfo?
+}
+
+model ClassificationInfo {
+  id                 Int               @id @default(autoincrement())
+  classification     Classification?   @relation(fields: [classificationId], references: [id])
+  classificationId   Int?
+  subClassification  SubClassificaion? @relation(fields: [subClassificaionId], references: [id])
+  subClassificaionId Int?
+  Job                Job               @relation(fields: [jobId], references: [id])
+  jobId              Int               @unique
+}
+
+model Classification {
+  id                 Int                  @id @default(autoincrement())
+  description        String
+  subClassification  SubClassificaion[]
+  ClassificationInfo ClassificationInfo[]
+}
+
+model SubClassificaion {
+  id                 Int                  @id @default(autoincrement())
+  description        String
+  Classification     Classification?      @relation(fields: [classificationId], references: [id])
+  classificationId   Int?
+  ClassificationInfo ClassificationInfo[]
 }
