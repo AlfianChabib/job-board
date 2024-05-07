@@ -17,8 +17,7 @@ enum UserType {
 
 model User {
   id             Int             @id @default(autoincrement())
-  firstName      String?
-  lastName       String?
+  username       String
   email          String          @unique
   role           UserType        @default(JobSeeker)
   UserProfile    UserProfile?
@@ -44,6 +43,7 @@ model UserProfile {
   id                 Int                  @id @default(autoincrement())
   user               User                 @relation(fields: [userId], references: [id])
   userId             Int                  @unique
+  username           String?
   summary            String?
   userSkill          UserSkill[]
   userExperience     UserExperience[]
@@ -94,6 +94,7 @@ model UserResume {
   id            Int         @id @default(autoincrement())
   UserProfile   UserProfile @relation(fields: [userProfileId], references: [id])
   userProfileId Int         @unique
+  resumeUrl     String?
 }
 
 model CompanyProfile {

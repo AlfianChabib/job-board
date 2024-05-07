@@ -1,0 +1,25 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <style>
+      body { font-family: Arial, Helvetica, sans-serif; } * { box-sizing: border-box; } .main { background-color:
+      #e5e5e5; width: 700px; margin: 0 auto; padding: 1rem; } h1 { text-align: center; font-size: 1.5rem; } .section {
+      background-color: #fff; width: 90%; margin: 0 auto 1rem auto; padding: 1rem; } p { text-align: center; margin: 0;
+      } .verificationUrl { font-size: 1rem; color: blue ; text-align: center; } span { display: block; text-align:
+      center; font-size: 12px; color: #aaa; width: 80%; margin: 0 auto; margin-bottom: 1rem; }
+    </style>
+    <title>Email Verification</title>
+  </head>
+  <body>
+    <h1>Wellcome to I-Need, Hello {{email}}, Your account has been added, Please verify your email</h1>
+    <div class='main'>
+      <h1>Verification Email Url</h1>
+      <a href='{{url}}'>{{url}}</a>
+      <span>
+        If this request did not come from you, change your account password immediately to prevent further unauthorized
+        access.
+      </span>
+    </div>
+  </body>
+</html>

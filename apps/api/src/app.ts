@@ -1,7 +1,9 @@
 import express, { json, urlencoded, Express, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { PORT } from './config';
-import { SampleRouter } from './routers/sample.router';
+import { ApiRouter } from './routers/api.router';
+import { errorMiddleware, notFoundMiddleware } from './middleware/error-middleware';
 
 export default class App {
   private app: Express;
@@ -16,43 +18,24 @@ export default class App {
   private configure(): void {
     this.app.use(cors());
     this.app.use(json());
+    this.app.use(cookieParser());
     this.app.use(urlencoded({ extended: true }));
   }
 
   private handleError(): void {
-    // not found
-    this.app.use((req: Request, res: Response, next: NextFunction) => {
-      if (req.path.includes('/api/')) {
-        res.status(404).send('Not found !');
-      } else {
-        next();
-      }
-    });
-
-    // error
-    this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-      if (req.path.includes('/api/')) {
-        console.error('Error : ', err.stack);
-        res.status(500).send('Error !');
-      } else {
-        next();
-      }
-    });
+    this.app.use(errorMiddleware);
+    this.app.use(notFoundMiddleware);
   }
 
   private routes(): void {
-    const sampleRouter = new SampleRouter();
-
-    this.app.get('/', (req: Request, res: Response) => {
-      res.send(`Hello, Purwadhika Student !`);
-    });
-
-    this.app.use('/samples', sampleRouter.getRouter());
+    const apiRouter = new ApiRouter();
+    this.app.get('/', (req: Request, res: Response) => res.send(`Hello, Purwadhika Student !`));
+    this.app.use('/api', apiRouter.getRouter());
   }
 
   public start(): void {
     this.app.listen(PORT, () => {
-      console.log(`  ➜  [API] Local:   http://localhost:${PORT}/`);
+      console.log(`  ➜  [API] Local:   http://localhost:${process.env.PORT}/`);
     });
   }
 }
