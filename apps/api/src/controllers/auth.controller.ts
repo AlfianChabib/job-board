@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { AuthService } from '../service/auth-service';
 import { LoginPayload, RegisterCompanyPayload, RegisterUserPayload, RegisterVerifyPayload } from '../model/auth-model';
+import { logger } from '../utils/logging';
 
 export class AuthController {
   async registerUser(req: Request, res: Response, next: NextFunction) {
@@ -15,6 +16,7 @@ export class AuthController {
           .json({ success: true, message: `Register ${email} success, please check your email to verification` });
       }
     } catch (error) {
+      logger.error(error);
       next(error);
     }
   }

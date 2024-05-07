@@ -1,5 +1,5 @@
 import Handlebars from 'handlebars';
-import path from 'path';
+import * as path from 'path';
 import fs from 'fs';
 import { transporter } from '../../utils/nodemailer';
 
@@ -29,6 +29,7 @@ export async function sendEmail(type: EmailType, payload: IEmailPayload) {
       html: template({ email: payload.email, url: payload.url }),
     });
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }

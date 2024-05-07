@@ -9,8 +9,8 @@ import { LoginPayload, RegisterCompanyPayload, RegisterUserPayload, RegisterVeri
 
 export class AuthService {
   static async registerUser(payload: RegisterUserPayload): Promise<{ email: string }> {
-    const existUser = await prisma.user.findUnique({ where: { email: payload.email } });
-    if (existUser) throw new ResponseError(400, 'Email already exist');
+    const existUser = await prisma.user.count({ where: { email: payload.email } });
+    if (existUser > 0) throw new ResponseError(400, 'Email already exist');
 
     const hashedPassword = hashPassword(payload.password);
     const user = await prisma.user.create({
@@ -35,8 +35,8 @@ export class AuthService {
   }
 
   static async registerCompany(payload: RegisterCompanyPayload): Promise<{ email: string }> {
-    const existCompany = await prisma.user.findUnique({ where: { email: payload.email } });
-    if (existCompany) throw new ResponseError(400, 'Email already exist');
+    const existEmail = await prisma.user.count({ where: { email: payload.email } });
+    if (existEmail > 0) throw new ResponseError(400, 'Email already exist');
 
     const hashedPassword = hashPassword(payload.password);
     const company = await prisma.user.create({
@@ -44,21 +44,21 @@ export class AuthService {
         email: payload.email,
         username: payload.companyName,
         role: 'Company',
-        AuthDetail: { create: { email: payload.email, hashPassword: hashedPassword, verified: true } },
+        AuthDetail: { create: { email: payload.email, hashPassword: hashedPassword } },
         CompanyProfile: { create: { companyName: payload.companyName } },
       },
     });
     const expiryToken = dayjs().add(1, 'hour').toDate();
     const { token, url } = genTokenUrl({ email: company.email, userId: company.id, expiry: expiryToken });
 
-    await prisma.user.update({
+    const updatedCompany = await prisma.user.update({
       where: { id: company.id },
       data: { AuthDetail: { update: { verificationCode: hashToken(token) } } },
     });
 
     await sendEmail(EmailType.VERIFICATION, { email: company.email, url });
 
-    return { email: company.email };
+    return { email: updatedCompany.email };
   }
 
   static async accountVerify(payload: RegisterVerifyPayload): Promise<{ email: string }> {
