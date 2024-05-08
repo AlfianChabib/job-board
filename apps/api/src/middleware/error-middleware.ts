@@ -10,6 +10,13 @@ export const errorMiddleware = async (error: Error, req: Request, res: Response,
       errors: error.issues,
     });
   } else if (error instanceof ResponseError) {
+    if (error.message === 'Unauthorized') {
+      res.clearCookie('refreshToken');
+      res.status(401).json({
+        success: false,
+        message: error.message,
+      });
+    }
     res.status(error.status).json({
       success: false,
       message: error.message,

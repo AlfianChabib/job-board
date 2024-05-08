@@ -2,10 +2,20 @@ import dayjs from 'dayjs';
 import { prisma } from '../prisma';
 import { hashToken } from '../helper/crypto/hash-token';
 import { genTokenUrl, verifyToken } from '../helper/jsonwebtoken/verify-token';
-import { hashPassword } from '../helper/bcrypt/password-helper';
+import { comparePassword, hashPassword } from '../helper/bcrypt/password-helper';
 import { ResponseError } from '../helper/response/error-response';
 import { EmailType, sendEmail } from '../helper/email/email-helper';
-import { LoginPayload, RegisterCompanyPayload, RegisterUserPayload, RegisterVerifyPayload } from '../model/auth-model';
+import {
+  AuthJWTPayload,
+  LoginPayload,
+  LoginServiceResponse,
+  RegisterCompanyPayload,
+  RegisterUserPayload,
+  RegisterVerifyPayload,
+  TokenServiceResponse,
+} from '../model/auth-model';
+import { generateTokens, verifyRefreshToken } from '../helper/jsonwebtoken/auth-token';
+import { Response } from 'express';
 
 export class AuthService {
   static async registerUser(payload: RegisterUserPayload): Promise<{ email: string }> {
@@ -22,7 +32,12 @@ export class AuthService {
       },
     });
     const expiryToken = dayjs().add(1, 'hour').toDate();
-    const { token, url } = genTokenUrl({ email: user.email, userId: user.id, expiry: expiryToken });
+    const { token, url } = genTokenUrl({
+      email: user.email,
+      userId: user.id,
+      userType: user.role,
+      expiry: expiryToken,
+    });
 
     await prisma.user.update({
       where: { id: user.id },
@@ -49,7 +64,12 @@ export class AuthService {
       },
     });
     const expiryToken = dayjs().add(1, 'hour').toDate();
-    const { token, url } = genTokenUrl({ email: company.email, userId: company.id, expiry: expiryToken });
+    const { token, url } = genTokenUrl({
+      email: company.email,
+      userId: company.id,
+      userType: company.role,
+      expiry: expiryToken,
+    });
 
     const updatedCompany = await prisma.user.update({
       where: { id: company.id },
@@ -79,17 +99,90 @@ export class AuthService {
     return { email: updatedUser.email };
   }
 
-  static async login(payload: LoginPayload): Promise<void> {
+  static async loginUser(payload: LoginPayload): Promise<LoginServiceResponse> {
     const existUser = await prisma.user.findUnique({ where: { email: payload.email }, include: { AuthDetail: true } });
 
     if (!existUser) throw new ResponseError(400, 'Account not found, please register');
     if (!existUser.AuthDetail || !existUser.AuthDetail.verified) {
       throw new ResponseError(400, 'Please verify your account');
     }
+    if (existUser.role === 'Company') throw new ResponseError(400, 'Please login with company account');
 
-    const isMatch = existUser.AuthDetail.hashPassword === hashPassword(payload.password);
+    const isMatch = comparePassword(payload.password, existUser.AuthDetail.hashPassword!);
     if (!isMatch) throw new ResponseError(400, 'Password not match');
 
-    return;
+    return { userId: existUser.id, email: existUser.email, role: existUser.role };
+  }
+
+  static async loginCompany(payload: LoginPayload): Promise<LoginServiceResponse> {
+    const existUser = await prisma.user.findUnique({ where: { email: payload.email }, include: { AuthDetail: true } });
+
+    if (!existUser) throw new ResponseError(400, 'Account not found, please register');
+    if (!existUser.AuthDetail || !existUser.AuthDetail.verified) {
+      throw new ResponseError(400, 'Please verify your account');
+    }
+    if (existUser.role === 'JobSeeker') throw new ResponseError(400, 'Please login with job seeker account');
+
+    const isMatch = comparePassword(payload.password, existUser.AuthDetail.hashPassword!);
+    if (!isMatch) throw new ResponseError(400, 'Password not match');
+
+    return { userId: existUser.id, email: existUser.email, role: existUser.role };
+  }
+
+  static async createToken(payload: LoginServiceResponse): Promise<TokenServiceResponse> {
+    const { refreshToken, accessToken } = generateTokens(payload.userId, payload.email, payload.role);
+
+    const expiry = dayjs().add(7, 'days').toDate();
+    await prisma.authDetail.update({
+      where: { userId: payload.userId },
+      data: { refreshToken: { create: { hashToken: hashToken(refreshToken), expiry } } },
+    });
+
+    return { refreshToken, accessToken };
+  }
+
+  static async refreshToken(refreshToken: string) {
+    const { userId, email, role } = verifyRefreshToken(refreshToken) as AuthJWTPayload;
+    const hashedToken = hashToken(refreshToken);
+
+    const existToken = await prisma.authDetail.findUnique({
+      where: { userId },
+      select: { refreshToken: { where: { hashToken: hashedToken } } },
+    });
+
+    if (existToken?.refreshToken.length === 0) {
+      return { accessToken: '', authorized: false };
+    }
+
+    const { accessToken } = generateTokens(userId, email, role);
+    return { accessToken, authorized: true };
+  }
+
+  static async logOut(userId: number, hashToken: string) {
+    await prisma.authDetail.update({
+      where: { userId },
+      data: { refreshToken: { deleteMany: { hashToken } } },
+    });
+  }
+
+  static async getSession(userId: number) {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: { AuthDetail: true, UserProfile: true },
+    });
+
+    return { username: user?.username, email: user?.email, role: user?.role, image: user?.UserProfile?.image };
+  }
+
+  static async sendToken(res: Response, refreshToken: string) {
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      sameSite: 'lax',
+      path: '/',
+    });
   }
 }

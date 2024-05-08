@@ -30,13 +30,23 @@ model User {
 }
 
 model AuthDetail {
-  id               Int     @id @default(autoincrement())
-  email            String  @unique
+  id               Int            @id @default(autoincrement())
+  email            String         @unique
   hashPassword     String?
-  verified         Boolean @default(false)
+  verified         Boolean        @default(false)
   verificationCode String?
-  user             User?   @relation(fields: [userId], references: [id])
-  userId           Int?    @unique
+  refreshToken     RefreshToken[]
+  user             User?          @relation(fields: [userId], references: [id])
+  userId           Int?           @unique
+}
+
+model RefreshToken {
+  id           Int         @id @default(autoincrement())
+  hashToken    String
+  revoked      Boolean     @default(false)
+  expiry       DateTime
+  AuthDetail   AuthDetail? @relation(fields: [authDetailId], references: [id])
+  authDetailId Int?
 }
 
 model UserProfile {
@@ -44,6 +54,7 @@ model UserProfile {
   user               User                 @relation(fields: [userId], references: [id])
   userId             Int                  @unique
   username           String?
+  image              String?
   summary            String?
   userSkill          UserSkill[]
   userExperience     UserExperience[]

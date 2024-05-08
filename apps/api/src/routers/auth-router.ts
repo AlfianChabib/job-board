@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { AuthController } from '../controllers/auth.controller';
+import { AuthController } from '../controllers/auth-controller';
 import { validateRequest, ValidationType } from '../validation/validation';
 import { AuthValidation } from '../validation/auth-validation';
 
@@ -33,10 +33,20 @@ export class AuthRouter {
     );
 
     this.router.post(
-      '/login',
+      '/login/user',
       validateRequest(AuthValidation.loginSchema, ValidationType.body),
-      this.authController.login,
+      this.authController.loginUser,
     );
+
+    this.router.post(
+      '/login/company',
+      validateRequest(AuthValidation.loginSchema, ValidationType.body),
+      this.authController.loginCompany,
+    );
+
+    this.router.post('/refresh', this.authController.refreshToken);
+    this.router.post('/logout', this.authController.logout);
+    this.router.get('/session', this.authController.session);
   }
 
   getRouter(): Router {

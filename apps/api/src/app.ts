@@ -2,8 +2,10 @@ import express, { json, urlencoded, Express, Request, Response, NextFunction } f
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { PORT } from './config';
-import { ApiRouter } from './routers/api.router';
+import { ApiRouter } from './routers/api-router';
 import { errorMiddleware, notFoundMiddleware } from './middleware/error-middleware';
+import { corsOptions } from './utils/cors-option';
+import { deserializeUser } from './middleware/auth/deserialize';
 
 export default class App {
   private app: Express;
@@ -16,10 +18,11 @@ export default class App {
   }
 
   private configure(): void {
-    this.app.use(cors());
+    this.app.use(cors(corsOptions));
     this.app.use(json());
     this.app.use(cookieParser());
     this.app.use(urlencoded({ extended: true }));
+    this.app.use(deserializeUser);
   }
 
   private handleError(): void {

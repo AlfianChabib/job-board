@@ -18,3 +18,20 @@ export type LoginPayload = {
   email: string;
   password: string;
 };
+
+export interface AuthJWTPayload {
+  userId: number;
+  role: string;
+  email: string;
+}
+
+export type TokenServiceResponse = {
+  refreshToken: string;
+  accessToken: string;
+};
+
+export type LoginServiceResponse = {
+  userId: number;
+  email: string;
+  role: string;
+};

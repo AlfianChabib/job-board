@@ -1,8 +1,10 @@
+import { UserType } from '@prisma/client';
 import { sign, verify } from 'jsonwebtoken';
 
 interface VerifyTokenData {
   email: string;
   userId: number;
+  userType: UserType;
   expiry: Date;
 }
 
@@ -20,7 +22,7 @@ export const verifyToken = (token: string): VerifyTokenData => {
 };
 
 export const verificationUrl = (token: string): string => {
-  return `${process.env.BASE_FRONTEND_URL}/verification/${token}`;
+  return `${process.env.BASE_FRONTEND_URL}/register/verification?token=${token}`;
 };
 
 export const genTokenUrl = (data: VerifyTokenData): { url: string; token: string } => {
