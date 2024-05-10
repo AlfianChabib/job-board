@@ -16,11 +16,13 @@ const FormTextarea = <TFormValues extends FieldValues>(props: FormTextareaProps<
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel />
+          <div className="flex w-full items-center justify-between">
+            <FormLabel>{props['aria-label']}</FormLabel>
+            <FormMessage className="text-xs" />
+          </div>
           <FormControl>
             <Textarea {...props} {...field} />
           </FormControl>
-          <FormMessage />
         </FormItem>
       )}
     />

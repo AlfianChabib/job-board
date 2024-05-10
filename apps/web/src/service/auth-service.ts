@@ -1,12 +1,14 @@
-import { api, authApi, refreshToken } from '@/lib/axios';
+import { api, authApi } from '@/lib/axios';
+import { initialSession } from '@/lib/constants';
 import { ErrorHandler } from '@/lib/error-handler';
 import { LoginSchema, RegisterCompanySchema, RegisterUserSchema } from '@/schema/auth-schema';
+import { SessionData } from '@/types';
 
 export const authService = {
   signIn: async (payload: LoginSchema, type: string) => {
     try {
-      const response = await api.post(`/auth/login/${type}`, payload).then((res) => res.data);
-      return response;
+      const response = await api.post(`/auth/login/${type}`, payload);
+      return response.data.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
@@ -14,8 +16,8 @@ export const authService = {
 
   registerCompany: async (payload: RegisterCompanySchema) => {
     try {
-      const response = await api.post('/auth/register/company', payload).then((res) => res.data);
-      return response;
+      const response = await api.post('/auth/register/company', payload);
+      return response.data.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
@@ -23,8 +25,8 @@ export const authService = {
 
   registerUser: async (payload: RegisterUserSchema) => {
     try {
-      const response = await api.post('/auth/register/user', payload).then((res) => res.data);
-      return response;
+      const response = await api.post('/auth/register/user', payload);
+      return response.data.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
@@ -32,8 +34,8 @@ export const authService = {
 
   verifyAccount: async (token: string) => {
     try {
-      const response = await authApi.post('/auth/register/verify', { token }).then((res) => res.data);
-      return response;
+      const response = await authApi.post('/auth/register/verify', { token });
+      return response.data.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
@@ -41,26 +43,30 @@ export const authService = {
 
   refreshToken: async () => {
     try {
-      const response = await api.post('/auth/refresh').then((res) => res.data);
-      return response;
+      const response = await api.post('/auth/refresh');
+      return response.data.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
   },
 
-  session: async () => {
+  session: async (): Promise<SessionData> => {
     try {
-      const response = await authApi.get('/auth/session').then((res) => res.data);
-      return response;
+      const response = await authApi.get('/auth/session');
+      const data = response.data.data;
+      return {
+        ...data,
+        isAuthenticated: true,
+      };
     } catch (error) {
-      throw new ErrorHandler(error);
+      return initialSession;
     }
   },
 
   logOut: async () => {
     try {
-      const response = await authApi.post('/auth/logout').then((res) => res.data);
-      return response;
+      const response = await authApi.post('/auth/logout');
+      return response.data.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }

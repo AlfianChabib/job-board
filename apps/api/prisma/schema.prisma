@@ -118,15 +118,17 @@ model CompanyProfile {
 }
 
 model Job {
-  id                 Int                 @id @default(autoincrement())
-  CompanyProfile     CompanyProfile      @relation(fields: [companyProfileId], references: [id])
-  companyProfileId   Int
-  title              String
-  description        String
-  requirements       String
-  location           String
-  workType           String
-  classificationInfo ClassificationInfo?
+  id                   Int                 @id @default(autoincrement())
+  CompanyProfile       CompanyProfile      @relation(fields: [companyProfileId], references: [id])
+  companyProfileId     Int
+  title                String
+  description          String
+  requirements         String
+  location             String
+  registrationDeadline DateTime
+  classificationInfo   ClassificationInfo?
+
+  @@map("jobs")
 }
 
 model ClassificationInfo {
@@ -141,15 +143,19 @@ model ClassificationInfo {
 
 model Classification {
   id                 Int                  @id @default(autoincrement())
-  description        String
+  title              String
   subClassification  SubClassificaion[]
   ClassificationInfo ClassificationInfo[]
+
+  @@map("classifications")
 }
 
 model SubClassificaion {
   id                 Int                  @id @default(autoincrement())
-  description        String
+  title              String
   Classification     Classification?      @relation(fields: [classificationId], references: [id])
   classificationId   Int?
   ClassificationInfo ClassificationInfo[]
+
+  @@map("subClassifications")
 }

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter as FontSans } from 'next/font/google';
+import TanstackProviders from '@/components/providers/tanstack-providers';
 import { cn } from '@/lib/utils';
+import { Inter as FontSans } from 'next/font/google';
+import { CurrentSessionProvider } from '@/components/providers/session-provider';
+
 import './globals.css';
-import SessionProvider from '@/components/providers/SessionProvider';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -17,9 +19,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        <SessionProvider>{children}</SessionProvider>
-        {/* {children} */}
+      <body className={cn('min-h-screen bg-primary/5 font-sans antialiased', fontSans.variable)}>
+        <TanstackProviders>
+          <CurrentSessionProvider>{children}</CurrentSessionProvider>
+        </TanstackProviders>
       </body>
     </html>
   );

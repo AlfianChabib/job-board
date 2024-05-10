@@ -1,10 +1,10 @@
 'use client';
 
 import MaxWidthWrapper from '@/components/base/MaxWidthWrapper';
-import { useSession } from '@/components/providers/SessionProvider';
+import { useCurrentSession } from '@/components/providers/session-provider';
 
 export default function Home() {
-  const session = useSession();
+  const session = useCurrentSession();
 
   console.log(session);
 

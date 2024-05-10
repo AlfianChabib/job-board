@@ -10,6 +10,9 @@
     "copy:templates": "cpx './src/template/**' 'dist/template'",
     "prisma": "npx prisma"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -10,6 +10,7 @@ import { loginSchema, LoginSchema } from '@/schema/auth-schema';
 import { Button } from '@/components/ui/button';
 import { authService } from '@/service/auth-service';
 import { useRouter } from 'next/navigation';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 interface SignInFormProps {
   type: 'user' | 'company';
@@ -19,20 +20,26 @@ export default function SignInForm(props: SignInFormProps) {
   const [loading, setLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState<AlertMessageProps | undefined>(undefined);
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '' },
   });
 
+  const onSignInSuccess = (res: any) => {
+    queryClient.invalidateQueries({ queryKey: ['session'] });
+    localStorage.setItem('accessToken', res.accessToken);
+    setAlertMessage({ title: 'Success', message: res.message, type: 'success' });
+    router.push(`/${props.type === 'user' ? '' : 'company/dashboard'}`);
+  };
+
   const onSubmit = (value: LoginSchema) => {
     setLoading(true);
     authService
       .signIn(value, props.type)
-      .then((res) => {
-        localStorage.setItem('accessToken', res.accessToken);
-        setAlertMessage({ title: 'Success', message: res.message, type: 'success' });
-        router.push(`/${props.type === 'user' ? '' : 'company'}`);
+      .then((res: any) => {
+        onSignInSuccess(res);
       })
       .catch((error) => {
         setAlertMessage({ title: 'Error', message: error.message, type: 'error' });
