@@ -15,7 +15,8 @@ export class JobRouter {
   }
 
   private initializeRoutes(): void {
-    this.router.get('/', Authorization.company, this.jobController.getJobs);
+    this.router.get('/company', Authorization.company, this.jobController.getCompanyJobs);
+    this.router.get('/', this.jobController.getJobs);
     this.router.patch('/:jobId', Authorization.company, this.jobController.updateJob);
     this.router.delete('/:jobId', Authorization.company, this.jobController.deleteJob);
     this.router.post(

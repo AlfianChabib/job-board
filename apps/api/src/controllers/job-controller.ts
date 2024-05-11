@@ -13,14 +13,24 @@ export class JobController {
     }
   }
 
-  async getJobs(req: Request, res: Response, next: NextFunction) {
+  // Get all company jobs
+  async getCompanyJobs(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.user;
-      const data = await JobService.getJobs(userId);
+      const data = await JobService.getCompanyJobs(userId);
 
       if (!data) throw new Error('Get jobs failed');
 
       return res.status(201).json({ success: true, message: 'Get jobs success', data });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getJobs(req: Request, res: Response, next: NextFunction) {
+    try {
+      const data = await JobService.getJobs();
+      return res.status(200).json({ success: true, message: 'Get jobs success', data });
     } catch (error) {
       next(error);
     }
@@ -54,6 +64,14 @@ export class JobController {
       const { jobId } = req.params;
       await JobService.deleteJob(parseInt(jobId, 10));
       return res.status(201).json({ success: true, message: 'Delete job success' });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async jobPagination(req: Request, res: Response, next: NextFunction) {
+    try {
+      return res.status(201).json({ success: true, message: 'Success' });
     } catch (error) {
       next(error);
     }

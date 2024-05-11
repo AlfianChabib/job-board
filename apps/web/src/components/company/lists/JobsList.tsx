@@ -2,14 +2,14 @@
 
 import { useQuery } from '@tanstack/react-query';
 import JobsTable from './jobs-table';
-import { jobService } from '@/service/job-service';
 import Loading from '@/app/(root)/loading';
 import { jobsColumns } from './columns';
+import { companyService } from '@/service/company-service';
 
 export default function JobsList() {
   const { data: jobs, isLoading } = useQuery({
     queryKey: ['company-jobs'],
-    queryFn: () => jobService.getJobs(),
+    queryFn: () => companyService.getCompanyJobs(),
   });
 
   return (

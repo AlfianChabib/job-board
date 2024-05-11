@@ -9,7 +9,7 @@ export interface RequestWithUser {
 
 declare global {
   namespace Express {
-    interface Request extends AuthJWTPayload {
+    interface Request {
       user: AuthJWTPayload;
     }
   }

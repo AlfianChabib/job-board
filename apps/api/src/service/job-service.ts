@@ -43,7 +43,7 @@ export class JobService {
     });
   }
 
-  static async getJobs(userId: number) {
+  static async getCompanyJobs(userId: number) {
     const existCompany = await prisma.companyProfile.findUnique({ where: { userId } });
 
     if (!existCompany) throw new Error('Company not found');
@@ -59,6 +59,25 @@ export class JobService {
         jobType: true,
         registrationDeadline: true,
         classificationInfo: { select: { classification: true, subClassification: true } },
+      },
+    });
+  }
+
+  static async getJobs() {
+    return prisma.job.findMany({
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        location: true,
+        requirements: true,
+        jobType: true,
+        registrationDeadline: true,
+        classificationInfo: {
+          select: { classification: true, subClassification: { select: { title: true, id: true } } },
+        },
+        CompanyProfile: { select: { companyName: true, logo: true, id: true } },
+        companyProfileId: true,
       },
     });
   }
