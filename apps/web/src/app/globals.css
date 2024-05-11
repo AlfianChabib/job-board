@@ -56,4 +56,11 @@
   body {
     @apply bg-background text-foreground;
   }
+  .default-h-screen {
+    min-height: calc(100vh - 7.5rem);
+  }
+
+  .h-jobs {
+    min-height: calc(100vh - 9rem);
+  }
 }

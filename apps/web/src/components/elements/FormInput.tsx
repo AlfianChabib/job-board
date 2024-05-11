@@ -5,6 +5,7 @@ import { Input, InputProps } from '../ui/input';
 export type FormInputProps<TFormValues extends FieldValues> = {
   control: Control<TFormValues>;
   name: Path<TFormValues>;
+  className?: string;
 } & Omit<InputProps, 'name'>;
 
 const FormInput = <TFormValues extends FieldValues>(props: FormInputProps<TFormValues>) => {
@@ -15,13 +16,13 @@ const FormInput = <TFormValues extends FieldValues>(props: FormInputProps<TFormV
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={props.className}>
           <div className="flex w-full items-center justify-between">
             <FormLabel>{props['aria-label']}</FormLabel>
             <FormMessage className="text-xs" />
           </div>
           <FormControl>
-            <Input {...props} {...field} />
+            <Input {...props} {...field} className={props.className} />
           </FormControl>
         </FormItem>
       )}

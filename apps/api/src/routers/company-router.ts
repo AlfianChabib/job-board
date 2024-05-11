@@ -13,13 +13,7 @@ export class CompanyRouter {
     this.initializeRoutes();
   }
 
-  private initializeRoutes(): void {
-    this.router.post(
-      '/job',
-      validateRequest(CompanyValidation.postJobSchema, ValidationType.body),
-      this.companyController.postJob,
-    );
-  }
+  private initializeRoutes(): void {}
 
   getRouter(): Router {
     return this.router;

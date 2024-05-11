@@ -7,8 +7,8 @@ export const postJobSchema = z.object({
   requirements: z.string().min(3, { message: 'Requirements must be at least 3 characters.' }),
   type: z.string().min(3, { message: 'Select a job type' }),
   registrationDeadline: z.date({ required_error: 'Select a registration deadline' }),
-  classification: z.string({ required_error: 'Select a job classification' }).transform((value) => parseInt(value)),
-  subClassification: z
+  classificationId: z.string({ required_error: 'Select a job classification' }).transform((value) => parseInt(value)),
+  subClassificationId: z
     .string({ required_error: 'Select a job sub classification' })
     .transform((value) => parseInt(value)),
 });

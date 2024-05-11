@@ -8,7 +8,7 @@ export const authService = {
   signIn: async (payload: LoginSchema, type: string) => {
     try {
       const response = await api.post(`/auth/login/${type}`, payload);
-      return response.data.data;
+      return response.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
@@ -17,7 +17,7 @@ export const authService = {
   registerCompany: async (payload: RegisterCompanySchema) => {
     try {
       const response = await api.post('/auth/register/company', payload);
-      return response.data.data;
+      return response.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
@@ -26,7 +26,7 @@ export const authService = {
   registerUser: async (payload: RegisterUserSchema) => {
     try {
       const response = await api.post('/auth/register/user', payload);
-      return response.data.data;
+      return response.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
@@ -35,7 +35,7 @@ export const authService = {
   verifyAccount: async (token: string) => {
     try {
       const response = await authApi.post('/auth/register/verify', { token });
-      return response.data.data;
+      return response.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
@@ -44,7 +44,7 @@ export const authService = {
   refreshToken: async () => {
     try {
       const response = await api.post('/auth/refresh');
-      return response.data.data;
+      return response.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }
@@ -66,7 +66,7 @@ export const authService = {
   logOut: async () => {
     try {
       const response = await authApi.post('/auth/logout');
-      return response.data.data;
+      return response.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }

@@ -20,21 +20,21 @@ const FormSelect = <TFormValues extends FieldValues>(props: FormSelectProps<TFor
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={props.className}>
           <div className="flex w-full items-center justify-between">
             <FormLabel>{props['aria-label']}</FormLabel>
             <FormMessage className="text-xs" />
           </div>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
-            <FormControl>
-              <div>
-                <SelectTrigger>
+          <Select onValueChange={field.onChange} defaultValue={field.value} disabled={props.disabled}>
+            <FormControl className="w-full">
+              <div className="w-full">
+                <SelectTrigger className="w-full">
                   {!field.value && (
                     <div className="text-muted-foreground hover:text-foreground w-full text-start">
                       {props.placeholder}
                     </div>
                   )}
-                  <SelectValue defaultValue={props.defaultValue} />
+                  <SelectValue defaultValue={props.defaultValue} className="w-full text-start" />
                 </SelectTrigger>
                 {children}
               </div>

@@ -15,6 +15,12 @@ enum UserType {
   Company
 }
 
+enum JobType {
+  PartTime
+  FullTime
+  Contract
+}
+
 model User {
   id             Int             @id @default(autoincrement())
   username       String
@@ -122,9 +128,10 @@ model Job {
   CompanyProfile       CompanyProfile      @relation(fields: [companyProfileId], references: [id])
   companyProfileId     Int
   title                String
-  description          String
-  requirements         String
+  description          String              @db.LongText
+  requirements         String              @db.LongText
   location             String
+  jobType              JobType             @default(PartTime)
   registrationDeadline DateTime
   classificationInfo   ClassificationInfo?
 
@@ -132,13 +139,13 @@ model Job {
 }
 
 model ClassificationInfo {
-  id                 Int               @id @default(autoincrement())
-  classification     Classification?   @relation(fields: [classificationId], references: [id])
-  classificationId   Int?
-  subClassification  SubClassificaion? @relation(fields: [subClassificaionId], references: [id])
-  subClassificaionId Int?
-  Job                Job               @relation(fields: [jobId], references: [id])
-  jobId              Int               @unique
+  id                  Int               @id @default(autoincrement())
+  classification      Classification?   @relation(fields: [classificationId], references: [id])
+  classificationId    Int?
+  subClassification   SubClassificaion? @relation(fields: [subClassificationId], references: [id])
+  subClassificationId Int?
+  Job                 Job               @relation(fields: [jobId], references: [id])
+  jobId               Int               @unique
 }
 
 model Classification {

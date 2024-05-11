@@ -1,25 +1,27 @@
 'use client';
 
-import { AlertMessageProps } from '@/components/elements/AlertMessage';
+import AlertMessage, { AlertMessageProps } from '@/components/elements/AlertMessage';
 import FormDate from '@/components/elements/FormDate';
 import FormInput from '@/components/elements/FormInput';
 import FormSelect from '@/components/elements/FormSelect';
 import FormTextarea from '@/components/elements/FormTextarea';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { workType } from '@/lib/constants';
+import { SelectContent, SelectItem } from '@/components/ui/select';
+import { defaultJobValue, workType } from '@/lib/constants';
 import { postJobSchema, PostJobSchema } from '@/schema/job-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Classification, dataService, SubClassification } from '@/service/data-service';
 import Loading from '@/app/(root)/loading';
+import { jobService } from '@/service/job-service';
 
 export default function CreateJobForm() {
   const [loading, setLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState<AlertMessageProps | undefined>(undefined);
+  const queryClient = useQueryClient();
 
   const { data: classifications, isLoading } = useQuery<Classification[]>({
     queryKey: ['classifications'],
@@ -32,110 +34,128 @@ export default function CreateJobForm() {
 
   const form = useForm<PostJobSchema>({
     resolver: zodResolver(postJobSchema),
-    defaultValues: {
-      title: '',
-      description: '',
-      location: '',
-      requirements: '',
-      type: '',
-      registrationDeadline: undefined,
-      classification: undefined,
-      subClassification: undefined,
+    defaultValues: defaultJobValue,
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: (data: PostJobSchema) => {
+      setLoading(true);
+      return jobService.postJob(data);
+    },
+    onSuccess: () => {
+      setLoading(false);
+      setAlertMessage({ type: 'success', message: 'Job created successfully' });
+      queryClient.invalidateQueries({ queryKey: ['company-jobs'] });
+      form.reset({ ...defaultJobValue });
+    },
+    onError: () => {
+      setLoading(false);
+      setAlertMessage({ type: 'error', message: 'Failed to create job' });
     },
   });
 
   function handleSubmit(values: PostJobSchema) {
-    console.log(values);
+    mutate(values);
   }
 
   if (isLoading || subLoading) return <Loading />;
 
   return (
-    <div className="flex bg-background justify-between rounded-md gap-4 p-4">
+    <div className="flex flex-col bg-background items-center justify-between gap-4 rounded-md p-4 border my-2">
+      {alertMessage && <AlertMessage {...alertMessage} />}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-1 flex-col gap-4">
-          <FormInput<PostJobSchema>
-            control={form.control}
-            type="text"
-            name="title"
-            aria-label="Job Title"
-            placeholder="Enter a simple job title (e.g. Sales Assistant)"
-          />
-          <FormTextarea<PostJobSchema>
-            control={form.control}
-            name="description"
-            aria-label="Job Description"
-            placeholder="Enter a description of the job (e.g. I want to be a sales assistant)"
-          />
-          <FormInput<PostJobSchema>
-            control={form.control}
-            type="text"
-            name="location"
-            aria-label="Location"
-            placeholder="Enter a location, city or region (e.g. Central Jakarta Jakarta)"
-          />
-          <FormTextarea<PostJobSchema>
-            control={form.control}
-            name="requirements"
-            aria-label="Requirements"
-            placeholder="Enter a requirements, (e.g. Minimum of 3 years of experience)"
-          />
-          <FormSelect<PostJobSchema>
-            control={form.control}
-            name="type"
-            aria-label="Job Type"
-            placeholder="Select Work Type"
-          >
-            <SelectContent>
-              {workType.map((item, index) => (
-                <SelectItem key={index} value={item.value}>
-                  {item.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </FormSelect>
-          <FormSelect<PostJobSchema>
-            control={form.control}
-            name="classification"
-            aria-label="Job Classification"
-            placeholder="Select Classification"
-          >
-            <SelectContent>
-              {classifications?.map((item, index) => (
-                <SelectItem key={index} value={String(item.id)}>
-                  {item.title}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </FormSelect>
-          <FormSelect<PostJobSchema>
-            control={form.control}
-            name="subClassification"
-            aria-label="Sub Classification"
-            placeholder="Select Sub Classification"
-          >
-            <SelectContent>
-              {subClassifications?.map((item, index) => (
-                <SelectItem key={index} value={String(item.id)}>
-                  {item.title}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </FormSelect>
-          <FormDate<PostJobSchema>
-            control={form.control}
-            name="registrationDeadline"
-            label="Registration Deadline"
-            placeholder="Select a deadline "
-          />
-          <Button type="submit" disabled={loading}>
-            Post
-          </Button>
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="grid w-full md:grid-cols-2 grid-cols-1 gap-4">
+          <div className="flex flex-col w-full gap-4">
+            <FormInput<PostJobSchema>
+              control={form.control}
+              type="text"
+              name="title"
+              aria-label="Job Title"
+              placeholder="Enter a simple job title (e.g. Sales Assistant)"
+            />
+            <FormTextarea<PostJobSchema>
+              control={form.control}
+              name="description"
+              aria-label="Job Description"
+              placeholder="Enter a description of the job (e.g. I want to be a sales assistant)"
+            />
+            <FormInput<PostJobSchema>
+              control={form.control}
+              type="text"
+              name="location"
+              aria-label="Location"
+              placeholder="Enter a location, city or region (e.g. Central Jakarta Jakarta)"
+            />
+            <FormTextarea<PostJobSchema>
+              control={form.control}
+              name="requirements"
+              aria-label="Requirements"
+              placeholder="Enter a requirements, (e.g. Minimum of 3 years of experience)"
+            />
+          </div>
+          <div className="flex flex-col w-full gap-4">
+            <FormSelect<PostJobSchema>
+              control={form.control}
+              name="type"
+              aria-label="Job Type"
+              placeholder="Select Work Type"
+            >
+              <SelectContent>
+                {workType.map((item, index) => (
+                  <SelectItem key={index} value={item.value}>
+                    {item.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </FormSelect>
+            <FormSelect<PostJobSchema>
+              control={form.control}
+              name="classificationId"
+              aria-label="Job Classification"
+              placeholder="Select Classification"
+              onSelect={() => form.reset({ subClassificationId: undefined })}
+            >
+              <SelectContent>
+                {classifications?.map((item, index) => (
+                  <SelectItem key={index} value={String(item.id)}>
+                    {item.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </FormSelect>
+            <FormSelect<PostJobSchema>
+              control={form.control}
+              name="subClassificationId"
+              aria-label="Sub Classification"
+              placeholder="Select Sub Classification"
+              disabled={form.getValues('classificationId') === 0}
+            >
+              {form.watch('classificationId') === 0 ? null : (
+                <SelectContent>
+                  {subClassifications?.map((item, index) => {
+                    if (item.classificationId === Number(form.getValues('classificationId').toString())) {
+                      return (
+                        <SelectItem key={index} value={String(item.id)}>
+                          {item.title}
+                        </SelectItem>
+                      );
+                    }
+                  })}
+                </SelectContent>
+              )}
+            </FormSelect>
+            <FormDate<PostJobSchema>
+              control={form.control}
+              name="registrationDeadline"
+              label="Registration Deadline"
+              placeholder="Select a deadline "
+            />
+            <Button type="submit" disabled={loading}>
+              Post
+            </Button>
+          </div>
         </form>
       </Form>
-      <div className="flex flex-1 flex-col gap-2">
-        <h2>Preview</h2>
-      </div>
     </div>
   );
 }

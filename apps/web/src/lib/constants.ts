@@ -9,6 +9,17 @@ export const initialSession: SessionData = {
   image: null,
 };
 
+export const defaultJobValue = {
+  title: '',
+  description: '',
+  requirements: '',
+  type: '',
+  location: '',
+  registrationDeadline: undefined,
+  classificationId: 0,
+  subClassificationId: 0,
+};
+
 export const companyMenuLinks = [
   { name: 'Account', href: '/company/account', icon: 'CircleUser' },
   { name: 'Dashboard', href: '/company/dashboard', icon: 'LayoutDashboard' },
@@ -22,7 +33,7 @@ export const userMenuLinks = [
 ];
 
 export const workType = [
-  { name: 'Full-time', value: 'full-time' },
-  { name: 'Part-time', value: 'part-time' },
-  { name: 'Contract', value: 'contract' },
+  { name: 'Full-time', value: 'FullTime' },
+  { name: 'Part-time', value: 'PartTime' },
+  { name: 'Contract', value: 'Contract' },
 ];

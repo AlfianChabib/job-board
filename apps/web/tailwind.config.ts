@@ -16,6 +16,10 @@ const config = {
       },
     },
     extend: {
+      minHeight: {
+        default: 'calc(100vh - 7.5rem)',
+        jobs: 'calc(100vh - 3.5rem)',
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
