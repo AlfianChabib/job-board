@@ -1,18 +1,19 @@
 'use client';
 
-import AlertMessage, { AlertMessageProps } from '@/components/elements/AlertMessage';
+import AlertMessage from '@/components/elements/AlertMessage';
 import FormInput from '@/components/elements/FormInput';
 import { Form } from '@/components/ui/form';
 import { registerUserSchema, RegisterUserSchema } from '@/schema/auth-schema';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { authService } from '@/service/auth-service';
+import { useLoading } from '@/hooks/use-loading';
+import { useAlertMessage } from '@/hooks/use-alert-message';
 
 export default function RegisterUserForm() {
-  const [loading, setLoading] = useState(false);
-  const [alertMessage, setAlertMessage] = useState<AlertMessageProps | undefined>(undefined);
+  const { loading, setLoading } = useLoading();
+  const { alertMessage, setAlertMessage } = useAlertMessage();
 
   const form = useForm<RegisterUserSchema>({
     resolver: zodResolver(registerUserSchema),

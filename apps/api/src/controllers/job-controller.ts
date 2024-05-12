@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { PostJobPayload, UpdateJobPayload } from '../model/job-model';
+import { JobListFeatures, PostJobPayload, UpdateJobPayload } from '../model/job-model';
 import { JobService } from '../service/job-service';
+import { JobType } from '@prisma/client';
 
 export class JobController {
   async getJob(req: Request, res: Response, next: NextFunction) {
@@ -69,10 +70,24 @@ export class JobController {
     }
   }
 
-  async jobPagination(req: Request, res: Response, next: NextFunction) {
+  async jobListFeature(req: Request, res: Response, next: NextFunction) {
     try {
-      return res.status(201).json({ success: true, message: 'Success' });
+      const { page, limit, keywords, location, sort, classificationId, jobType, offset } = req.body.queries;
+
+      const data = await JobService.jobListFeatures({
+        page,
+        limit,
+        keywords,
+        location,
+        sort,
+        offset,
+        classificationId,
+        jobType,
+      });
+
+      return res.status(201).json({ success: true, message: 'Success', data });
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }

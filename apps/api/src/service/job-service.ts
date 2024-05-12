@@ -1,4 +1,4 @@
-import { PostJobPayload, UpdateJobPayload } from '../model/job-model';
+import { JobListFeatures, PostJobPayload, UpdateJobPayload } from '../model/job-model';
 import { prisma } from '../prisma';
 
 export class JobService {
@@ -104,5 +104,54 @@ export class JobService {
 
   static async deleteJob(jobId: number) {
     await prisma.job.delete({ where: { id: jobId } });
+  }
+
+  static async jobListFeatures(payload: JobListFeatures) {
+    const data = await prisma.job.findMany({
+      where: {
+        registrationDeadline: { gte: new Date() },
+        deleted: false,
+        ...(payload.keywords && {
+          title: { contains: payload.keywords },
+        }),
+        ...(payload.location && {
+          location: { contains: payload.location },
+        }),
+        ...(payload.classificationId && {
+          classificationInfo: { classificationId: { equals: payload.classificationId } },
+        }),
+        ...(payload.jobType && {
+          jobType: { equals: payload.jobType },
+        }),
+      },
+      skip: payload.offset,
+      take: payload.limit,
+      orderBy: { createdAt: payload.sort === 'asc' ? 'asc' : 'desc' },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        location: true,
+        requirements: true,
+        jobType: true,
+        registrationDeadline: true,
+        createdAt: true,
+        classificationInfo: { select: { classification: true, subClassification: true } },
+        CompanyProfile: { select: { companyName: true, logo: true, id: true } },
+      },
+    });
+
+    const total = await prisma.job.count({
+      where: {
+        OR: [
+          { title: { contains: payload.keywords } },
+          { classificationInfo: { classificationId: { equals: payload.classificationId } } },
+          { jobType: { equals: payload.jobType } },
+        ],
+        location: { contains: payload.location },
+      },
+    });
+
+    return { data, total, payload };
   }
 }

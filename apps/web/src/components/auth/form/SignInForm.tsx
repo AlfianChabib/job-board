@@ -1,6 +1,6 @@
 'use client';
 
-import AlertMessage, { AlertMessageProps } from '@/components/elements/AlertMessage';
+import AlertMessage from '@/components/elements/AlertMessage';
 import FormInput from '@/components/elements/FormInput';
 import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
@@ -11,14 +11,16 @@ import { Button } from '@/components/ui/button';
 import { authService } from '@/service/auth-service';
 import { useRouter } from 'next/navigation';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useLoading } from '@/hooks/use-loading';
+import { useAlertMessage } from '@/hooks/use-alert-message';
 
 interface SignInFormProps {
   type: 'user' | 'company';
 }
 
 export default function SignInForm(props: SignInFormProps) {
-  const [loading, setLoading] = useState(false);
-  const [alertMessage, setAlertMessage] = useState<AlertMessageProps | undefined>(undefined);
+  const { loading, setLoading } = useLoading();
+  const { alertMessage, setAlertMessage } = useAlertMessage();
   const router = useRouter();
   const queryClient = useQueryClient();
 

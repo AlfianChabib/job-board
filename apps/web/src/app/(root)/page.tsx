@@ -9,8 +9,6 @@ import { useCurrentSession } from '@/components/providers/session-provider';
 export default function Home() {
   const session = useCurrentSession();
 
-  console.log(session);
-
   return (
     <MaxWidthWrapper className="flex min-h-default flex-col py-4">
       <SearchContainer />

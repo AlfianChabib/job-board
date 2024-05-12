@@ -11,4 +11,15 @@ export type PostJobPayload = {
   subClassificationId: number;
 };
 
+export type JobListFeatures = {
+  page: number;
+  limit: number;
+  keywords: string | '';
+  location: string | '';
+  sort: 'asc' | 'desc';
+  offset: number;
+  classificationId: number | undefined;
+  jobType: JobType | undefined;
+};
+
 export type UpdateJobPayload = PostJobPayload & { id: number };

@@ -1,33 +1,35 @@
 'use client';
 
-import AlertMessage, { AlertMessageProps } from '@/components/elements/AlertMessage';
+import AlertMessage from '@/components/elements/AlertMessage';
 import FormDate from '@/components/elements/FormDate';
 import FormInput from '@/components/elements/FormInput';
 import FormSelect from '@/components/elements/FormSelect';
 import FormTextarea from '@/components/elements/FormTextarea';
+import Loading from '@/app/(root)/loading';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { SelectContent, SelectItem } from '@/components/ui/select';
 import { defaultJobValue, workType } from '@/lib/constants';
 import { postJobSchema, PostJobSchema } from '@/schema/job-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Classification, dataService, SubClassification } from '@/service/data-service';
-import Loading from '@/app/(root)/loading';
+import { dataService } from '@/service/data-service';
 import { jobService } from '@/service/job-service';
+import { useLoading } from '@/hooks/use-loading';
+import { useAlertMessage } from '@/hooks/use-alert-message';
 
 export default function CreateJobForm() {
-  const [loading, setLoading] = useState(false);
-  const [alertMessage, setAlertMessage] = useState<AlertMessageProps | undefined>(undefined);
+  const { loading, setLoading } = useLoading();
+  const { alertMessage, setAlertMessage } = useAlertMessage();
   const queryClient = useQueryClient();
 
-  const { data: classifications, isLoading } = useQuery<Classification[]>({
+  const { data: classifications, isLoading } = useQuery({
     queryKey: ['classifications'],
     queryFn: dataService.classification,
   });
-  const { data: subClassifications, isLoading: subLoading } = useQuery<SubClassification[]>({
+
+  const { data: subClassifications, isLoading: subLoading } = useQuery({
     queryKey: ['sub-classifications'],
     queryFn: dataService.subClassification,
   });
@@ -44,13 +46,13 @@ export default function CreateJobForm() {
     },
     onSuccess: () => {
       setLoading(false);
-      setAlertMessage({ type: 'success', message: 'Job created successfully' });
+      setAlertMessage({ type: 'success', message: 'Job created successfully', title: 'Success' });
       queryClient.invalidateQueries({ queryKey: ['company-jobs'] });
       form.reset({ ...defaultJobValue });
     },
     onError: () => {
       setLoading(false);
-      setAlertMessage({ type: 'error', message: 'Failed to create job' });
+      setAlertMessage({ type: 'error', message: 'Failed to create job', title: 'Error' });
     },
   });
 

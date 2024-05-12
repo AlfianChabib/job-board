@@ -1,6 +1,6 @@
 'use client';
 
-import AlertMessage, { AlertMessageProps } from '@/components/elements/AlertMessage';
+import AlertMessage from '@/components/elements/AlertMessage';
 import FormInput from '@/components/elements/FormInput';
 import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
@@ -9,12 +9,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { registerCompanySchema, RegisterCompanySchema } from '@/schema/auth-schema';
 import { Button } from '@/components/ui/button';
 import { authService } from '@/service/auth-service';
+import { useLoading } from '@/hooks/use-loading';
+import { useAlertMessage } from '@/hooks/use-alert-message';
 
-interface RegisterCompanyFormProps {}
-
-export default function RegisterCompanyForm(props: RegisterCompanyFormProps) {
-  const [loading, setLoading] = useState(false);
-  const [alertMessage, setAlertMessage] = useState<AlertMessageProps | undefined>(undefined);
+export default function RegisterCompanyForm() {
+  const { loading, setLoading } = useLoading();
+  const { alertMessage, setAlertMessage } = useAlertMessage();
 
   const form = useForm<RegisterCompanySchema>({
     resolver: zodResolver(registerCompanySchema),

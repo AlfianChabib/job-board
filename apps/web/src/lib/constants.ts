@@ -24,6 +24,8 @@ export const companyMenuLinks = [
   { name: 'Account', href: '/company/account', icon: 'CircleUser' },
   { name: 'Dashboard', href: '/company/dashboard', icon: 'LayoutDashboard' },
   { name: 'Jobs', href: '/company/jobs', icon: 'FolderKanban' },
+  { name: 'Application', href: '/company/application', icon: 'Users' },
+  { name: 'Interview', href: '/company/interview', icon: 'FolderClock' },
 ];
 
 export const userMenuLinks = [

@@ -16,6 +16,7 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']),
   PORT: z.coerce.number().default(8000),
   BASE_FRONTEND_URL: z.string().url(),
+  BASE_API_URL: z.string().url(),
   JWT_ACCESS_LIFETIME: z.string().trim(),
   JWT_ACCESS_SECRET: z.string().trim(),
   JWT_REFRESH_LIFETIME: z.string().trim(),

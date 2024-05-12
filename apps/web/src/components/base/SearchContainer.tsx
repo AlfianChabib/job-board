@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '../ui/button';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { dataService } from '@/service/data-service';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -17,17 +17,19 @@ export default function SearchContainer() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const params = new URLSearchParams(searchParams);
+  const queryClient = useQueryClient();
   const { data: classifications } = useQuery({
     queryKey: ['classification'],
     queryFn: () => dataService.classification(),
   });
 
-  const defaultValue = {
-    keywords: searchParams.get('keywords') || '',
-    location: searchParams.get('location') || '',
-    classification: searchParams.get('classification') || '',
-    jobType: searchParams.get('jobType') || '',
-  };
+  const keywords = searchParams.get('keywords') || '';
+  const location = searchParams.get('location') || '';
+  const classificationId = searchParams.get('classificationId') || '';
+  const jobType = searchParams.get('jobType') || '';
+  const page = searchParams.get('page') || '';
+
+  const defaultValue = { keywords, location, classificationId, jobType };
 
   const form = useForm<SearchSchema>({
     defaultValues: defaultValue,
@@ -35,13 +37,26 @@ export default function SearchContainer() {
   });
 
   const onSubmit = (value: SearchSchema) => {
+    if (keywords) params.delete('keywords');
+    if (location) params.delete('location');
+    if (classificationId) params.delete('classificationId');
+    if (jobType) params.delete('jobType');
+
     value.keywords && params.set('keywords', value.keywords);
     value.location && params.set('location', value.location);
-    value.classification && params.set('classification', value.classification);
+    value.classificationId && params.set('classificationId', value.classificationId);
     value.jobType && params.set('jobType', value.jobType);
     params.set('page', '1');
+    router.replace(`?${params.toString()}`);
 
-    router.replace(`?${params.toString()}`, undefined);
+    queryClient.invalidateQueries({ queryKey: ['jobs'] });
+  };
+
+  const handleReset = () => {
+    const newparams = new URLSearchParams();
+    form.reset();
+    router.replace(`?${newparams.toString()}`);
+    queryClient.invalidateQueries({ queryKey: ['jobs'] });
   };
 
   return (
@@ -67,7 +82,7 @@ export default function SearchContainer() {
           />
           <FormSelect<SearchSchema>
             control={form.control}
-            name="classification"
+            name="classificationId"
             placeholder="Classification"
             className="col-span-2"
           >
@@ -99,6 +114,13 @@ export default function SearchContainer() {
             className="col-span-1 bg-background text-primary self-end place-items-end"
           >
             Search
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={handleReset}
+            className="col-span-1 bg-background text-primary self-end place-items-end"
+          >
+            Reset
           </Button>
         </form>
       </Form>

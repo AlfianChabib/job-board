@@ -1,4 +1,4 @@
-import express, { json, urlencoded, Express, Request, Response, NextFunction } from 'express';
+import express, { json, urlencoded, Express, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { PORT } from './config';
@@ -6,6 +6,7 @@ import { ApiRouter } from './routers/api-router';
 import { errorMiddleware, notFoundMiddleware } from './middleware/error-middleware';
 import { corsOptions } from './utils/cors-option';
 import { deserializeUser } from './middleware/auth/deserialize';
+import path from 'path';
 
 export default class App {
   private app: Express;
@@ -33,6 +34,7 @@ export default class App {
   private routes(): void {
     const apiRouter = new ApiRouter();
     this.app.get('/', (req: Request, res: Response) => res.send(`Hello, Purwadhika Student !`));
+    this.app.use('/api/public', express.static(path.join(__dirname, '../public')));
     this.app.use('/api', apiRouter.getRouter());
   }
 

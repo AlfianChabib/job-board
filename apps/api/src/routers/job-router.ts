@@ -3,6 +3,7 @@ import { validateRequest, ValidationType } from '../validation/validation';
 import { JobController } from '../controllers/job-controller';
 import { JobValidation } from '../validation/job-validation';
 import { Authorization } from '../middleware/auth/authorization';
+import { parsedJobQuery } from '../middleware/jobs/parsedQuery-middleware';
 
 export class JobRouter {
   private router: Router;
@@ -26,6 +27,7 @@ export class JobRouter {
       this.jobController.postJob,
     );
 
+    this.router.get('/feature', parsedJobQuery, this.jobController.jobListFeature);
     this.router.get('/:jobId', this.jobController.getJob);
   }
 

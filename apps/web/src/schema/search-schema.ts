@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const searchSchema = z.object({
   keywords: z.string().optional(),
   location: z.string().optional(),
-  classification: z.string().optional(),
+  classificationId: z.string().optional(),
   jobType: z.string().optional(),
 });
 

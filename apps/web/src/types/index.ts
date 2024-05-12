@@ -6,3 +6,13 @@ export type SessionData = {
   role: string;
   image: string | null;
 };
+
+export type QueryParams = {
+  page: string;
+  limit: string;
+  keywords: string;
+  location: string;
+  sort: string | 'asc' | 'desc';
+  classificationId: string;
+  jobType: string;
+};

@@ -12,10 +12,7 @@ export default function JobsList() {
     queryFn: () => companyService.getCompanyJobs(),
   });
 
-  return (
-    <div className="bg-background">
-      {isLoading && <Loading />}
-      {jobs && <JobsTable data={jobs} columns={jobsColumns} />}
-    </div>
-  );
+  if (isLoading) return <Loading />;
+
+  return <div className="bg-background">{jobs && <JobsTable data={jobs} columns={jobsColumns} />}</div>;
 }

@@ -16,6 +16,7 @@ import {
 } from '@tanstack/react-table';
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import Link from 'next/link';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -58,8 +59,12 @@ export default function JobsTable<TData, TValue>({ columns, data }: DataTablePro
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No Jobs Found
+                <TableCell
+                  colSpan={columns.length}
+                  className="flex flex-col h-96 items-center justify-center text-center text-3xl"
+                >
+                  <p>No Jobs Found</p>
+                  <Link href="/company/jobs/create">Create a Job</Link>
                 </TableCell>
               </TableRow>
             )}

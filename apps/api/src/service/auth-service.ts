@@ -167,13 +167,16 @@ export class AuthService {
 
   static async getSession(userId: number) {
     const user = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-      include: { AuthDetail: true, UserProfile: true },
+      where: { id: userId },
+      include: { AuthDetail: true, UserProfile: true, CompanyProfile: true },
     });
 
-    return { username: user?.username, email: user?.email, role: user?.role, image: user?.UserProfile?.image };
+    return {
+      username: user?.username,
+      email: user?.email,
+      role: user?.role,
+      image: user?.role === 'Company' ? user?.CompanyProfile?.logo : user?.UserProfile?.image,
+    };
   }
 
   static async sendToken(res: Response, refreshToken: string) {
