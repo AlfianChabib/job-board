@@ -22,6 +22,11 @@ export class UserRouter {
     );
     this.router.post('/profile/skills', this.userController.addUserSkill);
     this.router.delete('/profile/skills/:skillId', this.userController.deleteUserSkill);
+    this.router.post(
+      '/profile/experience',
+      validateRequest(UserValidation.validateAddUserExperience, ValidationType.body),
+      this.userController.addUserExperience,
+    );
   }
 
   getRouter(): Router {

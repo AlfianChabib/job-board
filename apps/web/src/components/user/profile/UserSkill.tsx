@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { UserSkill } from '@/model/user';
 import SelectSkill from './SelectSkill';
 import { X } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -16,9 +15,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { IUserSkill } from '@/model/user';
 
 interface UserSkillProps {
-  userSkill: UserSkill[] | undefined;
+  userSkill: IUserSkill[] | undefined;
 }
 
 export default function UserSkill({ userSkill }: UserSkillProps) {
@@ -38,8 +38,8 @@ export default function UserSkill({ userSkill }: UserSkillProps) {
     <div className="grid md:grid-cols-4 grid-cols-1  gap-4 bg-background border rounded-md p-4 w-full items-start">
       <h2 className="text-foreground/80 font-semibold col-span-1">User Skills</h2>
       <div className="flex flex-col w-full gap-3 md:col-span-3 col-span-1">
-        <p className="text-foreground/80 font-medium">Help employers find you by showcasing all of your skills.</p>
-        {userSkill ? (
+        <p className="text-foreground/80 text-sm">Help employers find you by showcasing all of your skills.</p>
+        {userSkill && userSkill.length > 0 ? (
           <div className="flex flex-wrap items-center gap-2 w-full rounded-md p-1">
             {userSkill.map((skill) => (
               <div
@@ -73,9 +73,7 @@ export default function UserSkill({ userSkill }: UserSkillProps) {
               </div>
             ))}
           </div>
-        ) : (
-          <p className="text-foreground/80 font-medium">Type skill</p>
-        )}
+        ) : null}
         <SelectSkill />
       </div>
     </div>

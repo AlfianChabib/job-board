@@ -5,12 +5,10 @@ import { userService } from '@/service/user-service';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../loading';
 import dynamic from 'next/dynamic';
-import UserSkill from '@/components/user/profile/UserSkill';
 
-const UserProfile = dynamic(() => import('@/components/user/profile/UserProfile'), {
-  ssr: false,
-  loading: () => <Loading />,
-});
+const UserProfile = dynamic(() => import('@/components/user/profile/UserProfile'), { ssr: false });
+const UserSkill = dynamic(() => import('@/components/user/profile/UserSkill'), { ssr: false });
+const UserExperience = dynamic(() => import('@/components/user/profile/UserExperience'), { ssr: false });
 
 export default function UserAccount() {
   const { data: userProfile, isLoading } = useQuery({
@@ -30,6 +28,7 @@ export default function UserAccount() {
         </div>
         <UserProfile userProfile={userProfile} />
         <UserSkill userSkill={userProfile?.userSkill} />
+        <UserExperience userExperience={userProfile?.userExperience} />
       </div>
     </MaxWidthWrapper>
   );

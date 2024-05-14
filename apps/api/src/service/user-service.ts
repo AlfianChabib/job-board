@@ -1,5 +1,5 @@
 import { ResponseError } from '../helper/response/error-response';
-import { UpdateProfilePayload } from '../model/user-model';
+import { AddUserExperiencePayload, UpdateProfilePayload } from '../model/user-model';
 import { prisma } from '../prisma';
 
 export class UserService {
@@ -65,6 +65,24 @@ export class UserService {
     await prisma.userProfile.update({
       where: { userId: userId },
       data: { userSkill: { delete: { id: skillId } } },
+    });
+  }
+
+  static async addUserExperience(userId: number, payload: AddUserExperiencePayload) {
+    await prisma.userProfile.update({
+      where: { userId: userId },
+      data: {
+        userExperience: {
+          create: {
+            companyName: payload.companyName,
+            jobTitle: payload.jobTitle,
+            started: payload.started,
+            description: payload.description,
+            ended: payload.ended,
+            stillInRole: payload.stillInRole,
+          },
+        },
+      },
     });
   }
 }

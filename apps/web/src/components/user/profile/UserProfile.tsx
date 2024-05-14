@@ -11,12 +11,12 @@ import { useForm } from 'react-hook-form';
 import React from 'react';
 import { userProfilePayloadSchema, UserProfilePayloadSchema } from '@/schema/user-schema';
 import FormInput from '@/components/elements/FormInput';
-import { UserProfile } from '@/model/user';
+import { IUserProfile } from '@/model/user';
 import FormTextarea from '@/components/elements/FormTextarea';
 import { userService } from '@/service/user-service';
 
 interface UserProfileProps {
-  userProfile: UserProfile | undefined;
+  userProfile: IUserProfile | undefined;
 }
 
 export default function UserProfile({ userProfile }: UserProfileProps) {

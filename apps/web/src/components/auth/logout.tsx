@@ -12,7 +12,7 @@ export default function Logout() {
 
   const handleLogout = () => {
     authService.logOut().then(() => {
-      queryClient.invalidateQueries({ queryKey: ['session'] });
+      queryClient.resetQueries();
       localStorage.removeItem('accessToken');
       router.push('/');
     });

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { UserService } from '../service/user-service';
 import { ResponseError } from '../helper/response/error-response';
 import { UpdateProfilePayload } from '../model/user-model';
+import { z } from 'zod';
 
 export class UserController {
   async getProfile(req: Request, res: Response, next: NextFunction) {
@@ -52,6 +53,19 @@ export class UserController {
       await UserService.deleteUserSkill(userId, parseInt(skillId, 10));
 
       return res.status(201).json({ success: true, message: 'Delete user skill success' });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async addUserExperience(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.user;
+      const data = req.body;
+
+      await UserService.addUserExperience(userId, data);
+
+      return res.status(201).json({ success: true, message: 'Update user experience success' });
     } catch (error) {
       next(error);
     }
