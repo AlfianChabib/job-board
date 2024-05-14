@@ -1,6 +1,6 @@
 'use client';
 
-import JobDetails from '@/components/base/JobDetails';
+import Job from '@/components/base/Job';
 import JobList from '@/components/base/JobList';
 import MaxWidthWrapper from '@/components/base/MaxWidthWrapper';
 import SearchContainer from '@/components/base/SearchContainer';
@@ -14,7 +14,7 @@ export default function Home() {
       <SearchContainer />
       <div className="grid md:grid-cols-5 grid-cols-2 gap-4 my-4">
         <JobList />
-        <JobDetails />
+        <Job />
       </div>
     </MaxWidthWrapper>
   );

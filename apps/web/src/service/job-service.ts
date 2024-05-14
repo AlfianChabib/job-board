@@ -15,6 +15,15 @@ export const jobService = {
     }
   },
 
+  getJobId: async (jobId: string | undefined): Promise<Job> => {
+    try {
+      const res = await api.get(`/jobs/${jobId}`);
+      return res.data.data;
+    } catch (error) {
+      throw new ErrorHandler(error);
+    }
+  },
+
   postJob: async (payload: PostJobSchema) => {
     try {
       const res = await authApi.post('/jobs', {

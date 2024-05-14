@@ -1,5 +1,6 @@
 export interface Job {
   classificationInfo: ClassificationInfo;
+  CompanyProfile: CompanyProfile;
   description: string;
   id: number;
   jobType: string;
@@ -12,6 +13,12 @@ export interface Job {
 export interface ClassificationInfo {
   classification: Classification;
   subClassification: SubClassification;
+}
+
+export interface CompanyProfile {
+  companyName: string;
+  id: number;
+  logo: string;
 }
 
 export interface Classification {

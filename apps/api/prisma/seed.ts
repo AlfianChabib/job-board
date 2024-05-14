@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import classificationData from './seed/classification.json';
+import skills from './seed/skills.json';
+import { SkillDataSeed } from '../src/model/data-model';
 
 const main = async () => {
   try {

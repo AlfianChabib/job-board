@@ -19,4 +19,15 @@ export class DataController {
       next(error);
     }
   }
+
+  async getSkill(req: Request, res: Response, next: NextFunction) {
+    try {
+      const text = req.params.text as string;
+      if (!text) return res.status(201).json({ success: true, message: 'No data', data: [] });
+      const data = await DataService.getSkill({ text });
+      return res.status(201).json({ success: true, message: 'Success', data });
+    } catch (error) {
+      next(error);
+    }
+  }
 }

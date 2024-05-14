@@ -16,3 +16,8 @@ export type QueryParams = {
   classificationId: string;
   jobType: string;
 };
+
+export type ResponseSuccess = {
+  success: boolean;
+  message: string;
+};

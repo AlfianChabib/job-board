@@ -14,6 +14,7 @@ export class DataRouter {
   initializeRoutes(): void {
     this.router.get('/classification', this.dataController.classification);
     this.router.get('/sub-classification', this.dataController.subClassification);
+    this.router.get('/skills/:text', this.dataController.getSkill);
   }
 
   getRouter(): Router {

@@ -71,9 +71,12 @@ model UserProfile {
   id                 Int                  @id @default(autoincrement())
   user               User                 @relation(fields: [userId], references: [id])
   userId             Int                  @unique
+  email              String?
+  phone              String?
+  address            String?
   username           String?
   image              String?
-  summary            String?
+  summary            String?              @db.LongText
   userSkill          UserSkill[]
   userExperience     UserExperience[]
   userClassification UserClassification[]
@@ -213,4 +216,10 @@ model SubClassificaion {
   UserClassification UserClassification[]
 
   @@map("subClassifications")
+}
+
+model Skill {
+  id    Int    @id @default(autoincrement())
+  Text  String @db.LongText
+  Label Int
 }

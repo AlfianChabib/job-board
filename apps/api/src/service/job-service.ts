@@ -143,12 +143,20 @@ export class JobService {
 
     const total = await prisma.job.count({
       where: {
-        OR: [
-          { title: { contains: payload.keywords } },
-          { classificationInfo: { classificationId: { equals: payload.classificationId } } },
-          { jobType: { equals: payload.jobType } },
-        ],
-        location: { contains: payload.location },
+        registrationDeadline: { gte: new Date() },
+        deleted: false,
+        ...(payload.keywords && {
+          title: { contains: payload.keywords },
+        }),
+        ...(payload.location && {
+          location: { contains: payload.location },
+        }),
+        ...(payload.classificationId && {
+          classificationInfo: { classificationId: { equals: payload.classificationId } },
+        }),
+        ...(payload.jobType && {
+          jobType: { equals: payload.jobType },
+        }),
       },
     });
 

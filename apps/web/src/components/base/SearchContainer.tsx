@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Button } from '../ui/button';
+import { Button, buttonVariants } from '../ui/button';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { dataService } from '@/service/data-service';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +12,7 @@ import { Form } from '../ui/form';
 import FormSelect from '../elements/FormSelect';
 import { SelectContent, SelectItem } from '../ui/select';
 import { workType } from '@/lib/constants';
+import Link from 'next/link';
 
 export default function SearchContainer() {
   const searchParams = useSearchParams();
@@ -52,19 +53,12 @@ export default function SearchContainer() {
     queryClient.invalidateQueries({ queryKey: ['jobs'] });
   };
 
-  const handleReset = () => {
-    const newparams = new URLSearchParams();
-    form.reset();
-    router.replace(`?${newparams.toString()}`);
-    queryClient.invalidateQueries({ queryKey: ['jobs'] });
-  };
-
   return (
     <div className="flex w-full bg-primary border rounded-md md:p-4 p-2">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid md:grid-cols-9 sm:grid-cols-4 grid-cols-2 w-full justify-end md:gap-4 gap-2"
+          className="grid md:grid-cols-10 sm:grid-cols-4 grid-cols-2 w-full justify-end md:gap-4 gap-2"
         >
           <FormInput<SearchSchema>
             control={form.control}
@@ -115,13 +109,15 @@ export default function SearchContainer() {
           >
             Search
           </Button>
-          <Button
-            variant="secondary"
-            onClick={handleReset}
-            className="col-span-1 bg-background text-primary self-end place-items-end"
+          <Link
+            href="/"
+            className={buttonVariants({
+              variant: 'secondary',
+              className: 'col-span-1 bg-background text-primary self-end place-items-end',
+            })}
           >
             Reset
-          </Button>
+          </Link>
         </form>
       </Form>
     </div>

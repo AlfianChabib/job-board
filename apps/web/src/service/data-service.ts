@@ -1,5 +1,6 @@
 import { api } from '@/lib/axios';
 import { ErrorHandler } from '@/lib/error-handler';
+import { Skill } from '@/model/data';
 
 export type Classification = {
   id: number;
@@ -27,6 +28,16 @@ export const dataService = {
     try {
       const response = await api.get('/data/sub-classification');
 
+      return response.data.data;
+    } catch (error) {
+      throw new ErrorHandler(error);
+    }
+  },
+
+  skills: async (text?: string): Promise<Skill[]> => {
+    try {
+      if (!text) return [];
+      const response = await api.get(`/data/skills/${text}`);
       return response.data.data;
     } catch (error) {
       throw new ErrorHandler(error);
