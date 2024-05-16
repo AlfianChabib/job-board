@@ -171,6 +171,7 @@ model Application {
   UserProfile   UserProfile?      @relation(fields: [userProfileId], references: [id])
   userProfileId Int?
   status        ApplicationStatus @default(Offer)
+  resume        String
   interview     Interview?
 
   @@map("applications")

@@ -5,7 +5,7 @@ export interface Job {
   id: number;
   jobType: string;
   location: string;
-  registrationDeadline: Date;
+  registrationDeadline: string;
   requirements: string;
   title: string;
 }

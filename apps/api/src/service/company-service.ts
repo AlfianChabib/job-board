@@ -1,3 +1,4 @@
+import { companyCompleteness } from '../helper/completenes';
 import { ResponseError } from '../helper/response/error-response';
 import { CompanyProfilePayload, CompanyStatistic } from '../model/company-model';
 import { prisma } from '../prisma';
@@ -50,21 +51,20 @@ export class CompanyService {
   static async updateCompanyProfile(userId: number, data: CompanyProfilePayload) {
     await prisma.companyProfile.update({
       where: { userId },
-      data: {
-        address: data.address,
-        companyName: data.companyName,
-        description: data.description,
-        phone: data.phone,
-      },
+      data: { address: data.address, companyName: data.companyName, description: data.description, phone: data.phone },
     });
   }
 
   static async updateCompanyLogo(userId: number, logo: string) {
-    await prisma.companyProfile.update({
+    await prisma.companyProfile.update({ where: { userId }, data: { logo } });
+  }
+
+  static async companyProfileCompleteness(userId: number) {
+    const data = await prisma.companyProfile.findUnique({
       where: { userId },
-      data: {
-        logo,
-      },
     });
+    if (!data) throw new ResponseError(404, 'Company not found');
+
+    return companyCompleteness(data);
   }
 }

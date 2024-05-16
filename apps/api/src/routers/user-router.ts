@@ -15,6 +15,7 @@ export class UserRouter {
 
   initializeRoutes(): void {
     this.router.get('/profile', this.userController.getProfile);
+    this.router.get('/profile/completeness', this.userController.profileCompleteness);
     this.router.patch(
       '/profile',
       validateRequest(UserValidation.validateUpdateProfile, ValidationType.body),
@@ -26,6 +27,11 @@ export class UserRouter {
       '/profile/experience',
       validateRequest(UserValidation.validateAddUserExperience, ValidationType.body),
       this.userController.addUserExperience,
+    );
+    this.router.post(
+      '/profile/education',
+      validateRequest(UserValidation.validateAddUserEducation, ValidationType.body),
+      this.userController.addUserEducation,
     );
   }
 

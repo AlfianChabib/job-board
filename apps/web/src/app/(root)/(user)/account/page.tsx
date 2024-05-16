@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 const UserProfile = dynamic(() => import('@/components/user/profile/UserProfile'), { ssr: false });
 const UserSkill = dynamic(() => import('@/components/user/profile/UserSkill'), { ssr: false });
 const UserExperience = dynamic(() => import('@/components/user/profile/UserExperience'), { ssr: false });
+const UserEducation = dynamic(() => import('@/components/user/profile/UserEducation'), { ssr: false });
 
 export default function UserAccount() {
   const { data: userProfile, isLoading } = useQuery({
@@ -29,6 +30,7 @@ export default function UserAccount() {
         <UserProfile userProfile={userProfile} />
         <UserSkill userSkill={userProfile?.userSkill} />
         <UserExperience userExperience={userProfile?.userExperience} />
+        <UserEducation userEducation={userProfile?.userEducation} />
       </div>
     </MaxWidthWrapper>
   );

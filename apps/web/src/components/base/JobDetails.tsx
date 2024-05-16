@@ -6,13 +6,25 @@ import { jobService } from '@/service/job-service';
 import Loading from '@/app/(root)/loading';
 import Image from 'next/image';
 import InitialJobDetails from './InitialJobDetails';
-import { Building, Clock, MapPin } from 'lucide-react';
+import { Building, Clock, Info, MapPin } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useCurrentSession } from '../providers/session-provider';
+import { userService } from '@/service/user-service';
+import { toast } from 'sonner';
+import { formatLocaleDate } from '@/lib/date';
 
 interface JobDetailsProps {
   jobId: string;
 }
 
 export default function JobDetails({ jobId }: JobDetailsProps) {
+  const session = useCurrentSession();
+  const router = useRouter();
+  const { data: profileCompleteness } = useQuery({
+    queryKey: ['profile-completeness'],
+    queryFn: userService.profileCompleteness,
+  });
+
   const { data: job, isLoading } = useQuery({
     queryKey: ['job-details', jobId],
     queryFn: () => jobService.getJobId(jobId),
@@ -20,7 +32,12 @@ export default function JobDetails({ jobId }: JobDetailsProps) {
 
   const handleApply = (jobId: number) => {
     console.log('apply');
-    // TODO: Apply
+    if (session?.isAuthenticated === false) {
+      router.push('/login/user');
+    } else if (profileCompleteness && profileCompleteness.strength < 6) {
+      router.push('/account');
+      toast.error('Please complete your profile first to apply job');
+    } else router.push(`/job-details/${jobId}/apply`);
   };
 
   if (isLoading) return <Loading />;
@@ -58,10 +75,14 @@ export default function JobDetails({ jobId }: JobDetailsProps) {
                 </p>
               </div>
             </div>
-            <div>
+            <div className="flex flex-col gap-2">
               <Button className="w-40" onClick={() => handleApply(job.id)}>
                 Apply
               </Button>
+              <div className="flex text-foreground/70 items-center text-sm gap-1">
+                <Info size={18} />
+                <p>Expires in {formatLocaleDate(job.registrationDeadline)}</p>
+              </div>
             </div>
             <div className="flex flex-col">
               <h3 className="text-foreground/80 font-semibold">Description:</h3>

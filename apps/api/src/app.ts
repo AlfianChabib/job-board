@@ -1,12 +1,12 @@
-import express, { json, urlencoded, Express, Request, Response } from 'express';
+import express, { json, urlencoded, Express, Request, Response, NextFunction } from 'express';
+import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { PORT } from './config';
 import { ApiRouter } from './routers/api-router';
-import { errorMiddleware, notFoundMiddleware } from './middleware/error-middleware';
+import { errorMiddleware } from './middleware/error-middleware';
 import { corsOptions } from './utils/cors-option';
 import { deserializeUser } from './middleware/auth/deserialize';
-import path from 'path';
 
 export default class App {
   private app: Express;
@@ -28,7 +28,21 @@ export default class App {
 
   private handleError(): void {
     this.app.use(errorMiddleware);
-    this.app.use(notFoundMiddleware);
+    this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+      if (req.path.includes('/api/')) {
+        console.error('Error : ', err.stack);
+        res.status(500).send('Error !');
+      } else {
+        next();
+      }
+    });
+    this.app.use((req: Request, res: Response, next: NextFunction) => {
+      if (req.path.includes('/api/')) {
+        res.status(404).send('Not found !');
+      } else {
+        next();
+      }
+    });
   }
 
   private routes(): void {

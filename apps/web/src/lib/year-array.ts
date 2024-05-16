@@ -15,3 +15,6 @@ export const getMonths = () => {
   }
   return months;
 };
+
+export const yearsArray = getYears();
+export const monthsArray = getMonths();

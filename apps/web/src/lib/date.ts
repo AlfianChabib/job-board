@@ -11,3 +11,12 @@ export const formatYearMonth = (date: Date | string) => {
   });
   return res;
 };
+
+export const formatLocaleDate = (date: string) => {
+  const res = new Date(date).toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  return res;
+};

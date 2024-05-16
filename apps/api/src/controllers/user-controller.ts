@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import { UserService } from '../service/user-service';
 import { ResponseError } from '../helper/response/error-response';
 import { UpdateProfilePayload } from '../model/user-model';
-import { z } from 'zod';
 
 export class UserController {
   async getProfile(req: Request, res: Response, next: NextFunction) {
@@ -66,6 +65,29 @@ export class UserController {
       await UserService.addUserExperience(userId, data);
 
       return res.status(201).json({ success: true, message: 'Update user experience success' });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async addUserEducation(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.user;
+      const data = req.body;
+
+      await UserService.addUserEducation(userId, data);
+
+      return res.status(201).json({ success: true, message: 'Update user education success' });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async profileCompleteness(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.user;
+      const data = await UserService.profileCompleteness(userId);
+      return res.status(201).json({ success: true, message: 'Get profile completeness success', data });
     } catch (error) {
       next(error);
     }

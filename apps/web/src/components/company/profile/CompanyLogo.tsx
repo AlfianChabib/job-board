@@ -36,6 +36,7 @@ export default function CompanyLogo({ logo, name }: CompanyLogoProps) {
       setAlertMessage({ title: 'Success', message: res.message, type: 'success' });
       queryClient.invalidateQueries({ queryKey: ['company-profile'] });
       queryClient.invalidateQueries({ queryKey: ['session'] });
+      queryClient.invalidateQueries({ queryKey: ['company-completeness'] });
       setLoading(false);
     },
     onError: (res) => {

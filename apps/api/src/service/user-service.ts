@@ -1,41 +1,18 @@
+import { userCompleteness } from '../helper/completenes';
 import { ResponseError } from '../helper/response/error-response';
-import { AddUserExperiencePayload, UpdateProfilePayload } from '../model/user-model';
+import { AddUserEducationPayload, AddUserExperiencePayload, UpdateProfilePayload } from '../model/user-model';
 import { prisma } from '../prisma';
 
 export class UserService {
   static async getUserProfile(userId: number) {
     const user = await prisma.userProfile.findUnique({
       where: { userId: userId },
-      select: {
-        id: true,
-        username: true,
-        image: true,
-        summary: true,
-        email: true,
-        phone: true,
-        address: true,
-        userResume: { select: { resumeUrl: true, id: true } },
-        userEducation: {
-          select: {
-            courseOrQualification: true,
-            institution: true,
-            isComplete: true,
-            description: true,
-            finishedYear: true,
-          },
-        },
-        userExperience: {
-          select: {
-            jobTitle: true,
-            companyName: true,
-            description: true,
-            started: true,
-            ended: true,
-            stillInRole: true,
-          },
-        },
-        userSkill: { select: { skillTitle: true, id: true } },
-        userClassification: { select: { classification: true, subClassification: true, id: true } },
+      include: {
+        userResume: true,
+        userEducation: true,
+        userExperience: true,
+        userSkill: true,
+        userClassification: { include: { classification: true, subClassification: true } },
       },
     });
 
@@ -45,12 +22,7 @@ export class UserService {
   static async updateProfile(userId: number, data: UpdateProfilePayload) {
     await prisma.userProfile.update({
       where: { userId: userId },
-      data: {
-        username: data.username,
-        summary: data.summary,
-        phone: data.phone,
-        address: data.address,
-      },
+      data: { username: data.username, summary: data.summary, phone: data.phone, address: data.address },
     });
   }
 
@@ -84,5 +56,32 @@ export class UserService {
         },
       },
     });
+  }
+
+  static async addUserEducation(userId: number, payload: AddUserEducationPayload) {
+    await prisma.userProfile.update({
+      where: { userId: userId },
+      data: {
+        userEducation: {
+          create: {
+            courseOrQualification: payload.courseOrQualification,
+            institution: payload.institution,
+            isComplete: payload.isComplete,
+            description: payload.description,
+            finishedYear: payload.finishedYear,
+          },
+        },
+      },
+    });
+  }
+
+  static async profileCompleteness(userId: number) {
+    const data = await prisma.userProfile.findUnique({
+      where: { userId },
+      include: { userEducation: true, userExperience: true, userSkill: true },
+    });
+    if (!data) throw new ResponseError(404, 'User not found');
+
+    return userCompleteness(data);
   }
 }

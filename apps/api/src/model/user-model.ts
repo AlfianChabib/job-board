@@ -13,3 +13,11 @@ export type AddUserExperiencePayload = {
   ended: Date | undefined;
   stillInRole: boolean;
 };
+
+export type AddUserEducationPayload = {
+  courseOrQualification: string;
+  institution: string;
+  isComplete: boolean;
+  description: string | undefined;
+  finishedYear: string | undefined;
+};

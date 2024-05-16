@@ -51,4 +51,13 @@ export const companyService = {
       throw new ErrorHandler(error);
     }
   },
+
+  getCompanyCompleteness: async (): Promise<{ strength: number; empty: string[] }> => {
+    try {
+      const res = await authApi.get('/company/profile/completeness');
+      return res.data.data;
+    } catch (error) {
+      throw new ErrorHandler(error);
+    }
+  },
 };

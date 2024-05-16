@@ -1,7 +1,6 @@
 import MaxWidthWrapper from '@/components/base/MaxWidthWrapper';
+import ButtonAddJob from '@/components/company/ButtonAddJob';
 import JobsList from '@/components/company/lists/JobsList';
-import { buttonVariants } from '@/components/ui/button';
-import Link from 'next/link';
 
 export default function Jobs() {
   return (
@@ -12,9 +11,7 @@ export default function Jobs() {
             <h1 className="text-xl font-semibold text-foreground/80">Job List</h1>
             <p className="text-sm text-foreground/70">Manage your jobs here</p>
           </div>
-          <Link href="/company/jobs/create" className={buttonVariants({ size: 'lg' })}>
-            Create a new job
-          </Link>
+          <ButtonAddJob />
         </div>
         <JobsList />
       </div>

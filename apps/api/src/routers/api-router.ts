@@ -5,6 +5,7 @@ import { Authorization } from '../middleware/auth/authorization';
 import { DataRouter } from './data-router';
 import { JobRouter } from './job-router';
 import { UserRouter } from './user-router';
+import { ApplicationRouter } from './application-router';
 
 export class ApiRouter {
   private router: Router;
@@ -12,6 +13,7 @@ export class ApiRouter {
   private companyRouter: CompanyRouter;
   private userRouter: UserRouter;
   private jobRouter: JobRouter;
+  private appliactionRouter: ApplicationRouter;
   private dataRouter: DataRouter;
 
   constructor() {
@@ -19,6 +21,7 @@ export class ApiRouter {
     this.companyRouter = new CompanyRouter();
     this.userRouter = new UserRouter();
     this.jobRouter = new JobRouter();
+    this.appliactionRouter = new ApplicationRouter();
     this.dataRouter = new DataRouter();
     this.router = Router();
     this.initializeRoutes();
@@ -29,6 +32,7 @@ export class ApiRouter {
     this.router.use('/company', Authorization.company, this.companyRouter.getRouter());
     this.router.use('/user', Authorization.user, this.userRouter.getRouter());
     this.router.use('/jobs', this.jobRouter.getRouter());
+    this.router.use('/application', this.appliactionRouter.getRouter());
     this.router.use('/data', this.dataRouter.getRouter());
   }
 

@@ -1,15 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { AuthService } from '../service/auth-service';
-import {
-  AuthJWTPayload,
-  LoginPayload,
-  RegisterCompanyPayload,
-  RegisterUserPayload,
-  RegisterVerifyPayload,
-} from '../model/auth-model';
+import { LoginPayload, RegisterCompanyPayload, RegisterUserPayload, RegisterVerifyPayload } from '../model/auth-model';
 import { logger } from '../utils/logging';
 import { ResponseError } from '../helper/response/error-response';
-import { verifyRefreshToken } from '../helper/jsonwebtoken/auth-token';
 import { hashToken } from '../helper/crypto/hash-token';
 
 export class AuthController {
@@ -116,7 +109,6 @@ export class AuthController {
       res.clearCookie('refreshToken');
       return res.status(201).json({ success: true, message: 'Logout success' });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

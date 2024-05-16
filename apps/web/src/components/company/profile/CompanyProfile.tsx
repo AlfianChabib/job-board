@@ -43,6 +43,7 @@ export default function CompanyProfile({ companyProfile }: CompanyProfileProps) 
       setLoading(false);
       setAlertMessage({ title: 'Success', message: res.message, type: 'success' });
       queryClient.invalidateQueries({ queryKey: ['company-profile'] });
+      queryClient.invalidateQueries({ queryKey: ['company-completeness'] });
     },
     onError: (res) => {
       setLoading(false);

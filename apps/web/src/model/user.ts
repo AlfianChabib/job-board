@@ -6,9 +6,9 @@ export type IUserProfile = {
   phone: string;
   summary: string;
   userClassification: any[];
-  userEducation: any[];
+  userEducation: IUserEducation[];
   userExperience: IUserExperience[];
-  userResume: null;
+  userResume: string;
   userSkill: IUserSkill[];
   username: string;
 };
@@ -30,16 +30,6 @@ export interface IUserExperience {
   stillInRole: boolean;
 }
 
-export interface IUserEducation {
-  id: number;
-  userProfileId: number;
-  degree: string;
-  major: string;
-  institution: string;
-  started: string | Date;
-  ended: string | Date;
-}
-
 export interface UserExperiencePayload {
   jobTitle: string;
   companyName: string;
@@ -47,4 +37,14 @@ export interface UserExperiencePayload {
   started: Date;
   ended: Date | undefined;
   stillInRole: boolean;
+}
+
+export interface IUserEducation {
+  id: number;
+  profileId: number;
+  courseOrQualification: string;
+  description: string;
+  finishedYear: string;
+  institution: string;
+  isComplete: boolean;
 }

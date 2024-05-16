@@ -5,6 +5,7 @@ type DestinationCallback = (error: Error | null, destination: string) => void;
 type FileNameCallback = (error: Error | null, filename: string) => void;
 
 const fileLimit = { fileSize: 1024 * 1024 };
+const pdfLimit = { fileSize: 1024 * 1024 * 2 };
 
 const fileFilter = (_req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
   const extFilter = ['jpg', 'jpeg', 'png', 'pdf'];
@@ -21,13 +22,17 @@ export const multerUpload = (filePrefix: string, folderName: string) => {
       cb(null, destination);
     },
     filename: (req: Request, file: Express.Multer.File, cb: FileNameCallback) => {
+      let filename: string;
       const originalname = file.originalname.split('.');
       const fileExt = originalname[originalname.length - 1];
-      const filename = `${filePrefix}-${Date.now()}.${fileExt}`;
+      filename = `${filePrefix}-${Date.now()}.${fileExt}`;
+      if (filePrefix === 'cv') {
+        filename = `${filePrefix}-${req.user.email}-${Date.now()}.${fileExt}`;
+      }
       cb(null, filename);
     },
   });
-  return multer({ storage, fileFilter, limits: fileLimit });
+  return multer({ storage, fileFilter, limits: filePrefix === 'cv' ? pdfLimit : fileLimit });
 };
 
 export const uploadUserProfile = multerUpload('user', 'user').single('image');

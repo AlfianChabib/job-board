@@ -64,4 +64,15 @@ export class CompanyController {
       next(error);
     }
   }
+
+  async getCompanyCompleteness(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.user;
+      const data = await CompanyService.companyProfileCompleteness(userId);
+
+      return res.status(201).json({ success: true, message: 'Get company completeness success', data });
+    } catch (error) {
+      next(error);
+    }
+  }
 }

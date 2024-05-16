@@ -53,6 +53,17 @@ export default function SearchContainer() {
     queryClient.invalidateQueries({ queryKey: ['jobs'] });
   };
 
+  const handleReset = () => {
+    if (params.has('keywords')) params.delete('keywords');
+    if (params.has('location')) params.delete('location');
+    if (params.has('classificationId')) params.delete('classificationId');
+    if (params.has('jobType')) params.delete('jobType');
+    if (params.has('page')) params.delete('page');
+    form.reset();
+
+    router.prefetch('/');
+  };
+
   return (
     <div className="flex w-full bg-primary border rounded-md md:p-4 p-2">
       <Form {...form}>
@@ -109,7 +120,7 @@ export default function SearchContainer() {
           >
             Search
           </Button>
-          <Link
+          {/* <Link
             href="/"
             className={buttonVariants({
               variant: 'secondary',
@@ -117,7 +128,14 @@ export default function SearchContainer() {
             })}
           >
             Reset
-          </Link>
+          </Link> */}
+          <Button
+            variant="secondary"
+            className="col-span-1 bg-background text-primary self-end place-items-end"
+            onClick={handleReset}
+          >
+            Reset
+          </Button>
         </form>
       </Form>
     </div>

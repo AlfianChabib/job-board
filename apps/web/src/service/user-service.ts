@@ -1,7 +1,7 @@
 import { authApi } from '@/lib/axios';
 import { ErrorHandler } from '@/lib/error-handler';
 import { IUserProfile, UserExperiencePayload } from '@/model/user';
-import { UserProfilePayloadSchema } from '@/schema/user-schema';
+import { UserEducationSchema, UserProfilePayloadSchema } from '@/schema/user-schema';
 import { ResponseSuccess } from '@/types';
 
 export const userService = {
@@ -45,6 +45,24 @@ export const userService = {
     try {
       const res = await authApi.post('/user/profile/experience', payload);
       return res.data;
+    } catch (error) {
+      throw new ErrorHandler(error);
+    }
+  },
+
+  addUserEducation: async (payload: UserEducationSchema): Promise<ResponseSuccess> => {
+    try {
+      const res = await authApi.post('/user/profile/education', payload);
+      return res.data;
+    } catch (error) {
+      throw new ErrorHandler(error);
+    }
+  },
+
+  profileCompleteness: async (): Promise<{ strength: number; empty: string[] }> => {
+    try {
+      const res = await authApi.get('/user/profile/completeness');
+      return res.data.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }

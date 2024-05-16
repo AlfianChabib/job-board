@@ -3,6 +3,7 @@ import TanstackProviders from '@/components/providers/tanstack-providers';
 import { cn } from '@/lib/utils';
 import { Inter as FontSans } from 'next/font/google';
 import { CurrentSessionProvider } from '@/components/providers/session-provider';
+import { Toaster } from '@/components/ui/sonner';
 
 import './globals.css';
 
@@ -21,7 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className={cn('min-h-screen bg-primary/5 font-sans antialiased', fontSans.variable)}>
         <TanstackProviders>
-          <CurrentSessionProvider>{children}</CurrentSessionProvider>
+          <CurrentSessionProvider>
+            {children}
+            <Toaster position="top-center" richColors />
+          </CurrentSessionProvider>
         </TanstackProviders>
       </body>
     </html>

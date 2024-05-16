@@ -16,4 +16,12 @@ export class UserValidation {
     ended: z.string().optional().nullable(),
     stillInRole: z.boolean().default(false),
   });
+
+  static validateAddUserEducation: ZodType = z.object({
+    courseOrQualification: z.string({ required_error: "School name can't be empty" }),
+    institution: z.string({ required_error: "Institute name can't be empty" }),
+    description: z.string().optional().nullable(),
+    finishedYear: z.string({ required_error: "Finished year can't be empty" }),
+    isComplete: z.boolean().default(true),
+  });
 }

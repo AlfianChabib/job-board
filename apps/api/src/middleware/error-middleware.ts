@@ -25,13 +25,3 @@ export const errorMiddleware = async (error: Error, req: Request, res: Response,
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-
-export const notFoundMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-  if (req.path.includes('/api/')) {
-    res.status(404).json({
-      message: 'Not found !',
-    });
-  } else {
-    next();
-  }
-};
