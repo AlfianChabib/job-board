@@ -3,13 +3,22 @@ import { ErrorHandler } from '@/lib/error-handler';
 import { queryBuilder } from '@/lib/query-builder';
 import { Job } from '@/model/job';
 import { PostJobSchema } from '@/schema/job-schema';
-import { QueryParams } from '@/types';
+import { QueryParams, ResponseSuccess } from '@/types';
 
 export const jobService = {
   getJobs: async (): Promise<Job[]> => {
     try {
       const res = await authApi.get('/jobs');
       return res.data.data;
+    } catch (error) {
+      throw new ErrorHandler(error);
+    }
+  },
+
+  deleteJob: async (jobId: number): Promise<ResponseSuccess> => {
+    try {
+      const res = await authApi.delete(`/jobs/${jobId}`);
+      return res.data;
     } catch (error) {
       throw new ErrorHandler(error);
     }

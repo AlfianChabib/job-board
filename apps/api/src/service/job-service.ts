@@ -40,7 +40,7 @@ export class JobService {
     if (!existCompany) throw new Error('Company not found');
 
     return prisma.job.findMany({
-      where: { companyProfileId: existCompany.id },
+      where: { companyProfileId: existCompany.id, deleted: false },
       select: {
         id: true,
         title: true,
@@ -56,6 +56,7 @@ export class JobService {
 
   static async getJobs() {
     return prisma.job.findMany({
+      where: { deleted: false },
       select: {
         id: true,
         title: true,
@@ -91,7 +92,7 @@ export class JobService {
   }
 
   static async deleteJob(jobId: number) {
-    await prisma.job.delete({ where: { id: jobId } });
+    await prisma.job.update({ where: { id: jobId }, data: { deleted: true } });
   }
 
   static async jobListFeatures(payload: JobListFeatures) {

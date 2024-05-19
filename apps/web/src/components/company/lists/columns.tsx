@@ -7,6 +7,7 @@ import { CandidateTableRowActions } from '../table/candidate-table-row-actions';
 import { IInterviewCompany } from '@/model/company';
 import InterviewTableRowActions from '../table/interview-table-row-actions';
 import Link from 'next/link';
+import JobsTableRowActions from '../table/jobs-table-row-actions';
 
 export const jobsColumns: ColumnDef<Job>[] = [
   { accessorKey: 'id', header: 'Id' },
@@ -25,6 +26,13 @@ export const jobsColumns: ColumnDef<Job>[] = [
     },
   },
   { accessorKey: 'classificationInfo.classification.title', header: 'Classification' },
+  {
+    id: 'actions',
+    cell: ({ row }) => {
+      const id = row.original.id;
+      return <JobsTableRowActions row={row} jobId={id} />;
+    },
+  },
 ];
 
 export const candidateColumn: ColumnDef<ICandidate>[] = [

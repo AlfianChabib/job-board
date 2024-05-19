@@ -10,7 +10,7 @@ export class CompanyService {
     if (!existCompany) throw new Error('Company not found');
 
     return prisma.job.findMany({
-      where: { companyProfileId: existCompany.id },
+      where: { companyProfileId: existCompany.id, deleted: false },
       select: {
         id: true,
         title: true,
