@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { JobListFeatures, PostJobPayload, UpdateJobPayload } from '../model/job-model';
+import { PostJobPayload, UpdateJobPayload } from '../model/job-model';
 import { JobService } from '../service/job-service';
-import { JobType } from '@prisma/client';
+import { AuthJWTPayload } from '../model/auth-model';
 
 export class JobController {
   async getJob(req: Request, res: Response, next: NextFunction) {
@@ -14,10 +14,9 @@ export class JobController {
     }
   }
 
-  // Get all company jobs
   async getCompanyJobs(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.user;
+      const { userId } = req.user as AuthJWTPayload;
       const data = await JobService.getCompanyJobs(userId);
 
       if (!data) throw new Error('Get jobs failed');
@@ -40,8 +39,9 @@ export class JobController {
   async postJob(req: Request, res: Response, next: NextFunction) {
     try {
       const data = req.body as PostJobPayload;
+      const { userId } = req.user as AuthJWTPayload;
 
-      await JobService.postJob(data, req.user.userId);
+      await JobService.postJob(data, userId);
 
       return res.status(201).json({ success: true, message: 'Post job success' });
     } catch (error) {

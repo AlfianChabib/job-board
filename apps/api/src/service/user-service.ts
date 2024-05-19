@@ -84,4 +84,29 @@ export class UserService {
 
     return userCompleteness(data);
   }
+
+  static async getAppliedJobs(userId: number) {
+    const userProfile = await prisma.userProfile.findUnique({ where: { userId } });
+
+    if (!userProfile) throw new ResponseError(404, 'User not found');
+
+    const data = await prisma.application.findMany({
+      where: { userProfileId: userProfile.id },
+      include: { Job: { include: { CompanyProfile: true, application: true } }, interview: true },
+    });
+    return data;
+  }
+
+  static async getInterviewsJobs(userId: number) {
+    const userProfile = await prisma.userProfile.findUnique({ where: { userId } });
+
+    if (!userProfile) throw new ResponseError(404, 'User not found');
+
+    const data = await prisma.interview.findMany({
+      where: { Application: { userProfileId: userProfile.id } },
+      include: { Application: { include: { Job: { include: { CompanyProfile: true } } } } },
+    });
+
+    return data;
+  }
 }

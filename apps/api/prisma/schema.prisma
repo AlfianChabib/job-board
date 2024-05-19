@@ -23,6 +23,7 @@ enum JobType {
 
 enum ApplicationStatus {
   Offer
+  Accepted
   Interview
   Successful
   Unsuccessful
@@ -31,6 +32,14 @@ enum ApplicationStatus {
 enum InterviewType {
   Online
   Offline
+}
+
+enum InterviewStatus {
+  Sending
+  Accept
+  Canceled
+  Rescheduling
+  Finished
 }
 
 model User {
@@ -178,14 +187,15 @@ model Application {
 }
 
 model Interview {
-  id                  Int            @id @default(autoincrement())
+  id                  Int              @id @default(autoincrement())
   interviewSchedule   DateTime?
   rescheduleInterview DateTime?
-  interviewType       InterviewType? @default(Online)
+  interviewType       InterviewType?   @default(Online)
   interviewUrl        String?
   interviewLocation   String?
-  Application         Application?   @relation(fields: [applicationId], references: [id])
-  applicationId       Int?           @unique
+  interviewStatus     InterviewStatus? @default(Sending)
+  Application         Application?     @relation(fields: [applicationId], references: [id])
+  applicationId       Int?             @unique
 }
 
 model ClassificationInfo {

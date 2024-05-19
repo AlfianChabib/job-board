@@ -18,6 +18,7 @@ export default function UploadDocument({ jobId }: UploadDocumentProps) {
   const { loading, setLoading } = useLoading();
   const { alertMessage, setAlertMessage } = useAlertMessage();
   const [resume, setresume] = useState<File | null>(null);
+
   const { mutate } = useMutation({
     mutationFn: (data: FormData) => {
       return applicationService.uploadResume(data);

@@ -1,17 +1,34 @@
-import { ChangeEvent } from 'react';
 import { z } from 'zod';
 
-const MAX_FILE_SIZE = 2097152;
-const ACCEPTED_PDF_TYPES = ['application/pdf'];
+export const scheduleInterviewSchema = z
+  .object({
+    applicationId: z.number({ required_error: "Application id can't be empty" }),
+    interviewSchedule: z.date({ required_error: 'Select an interview date' }),
+    interviewType: z.enum(['Online', 'Offline'], { required_error: 'Select an interview type' }).default('Online'),
+    interviewLocation: z.string(),
+    interviewUrl: z.string(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.interviewType === 'Online' && !data.interviewUrl) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Interview url is required when interview type is online',
+        path: ['interviewUrl'],
+      });
+    }
+    if (data.interviewType === 'Offline' && !data.interviewLocation) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Interview location is required when interview type is offline',
+        path: ['interviewLocation'],
+      });
+    }
+  });
 
-export const applicationSchema = z.object({
-  resume: z
-    .any()
-    .refine((e: ChangeEvent<HTMLInputElement>) => e.target.files?.[0].type === 'application/pdf', 'File is required'),
+export const rescheduleSchema = z.object({
+  interviewId: z.number({ required_error: "Interview id can't be empty" }),
+  rescheduleDate: z.date({ required_error: 'Select a reschedule date' }),
 });
 
-export type ApplicationSchema = z.infer<typeof applicationSchema>;
-
-// .refine((e: HTMLInputElement) => e.files?.[0].type === 'application/pdf', 'File is required'),
-// .refine((e: HTMLInputElement) => ACCEPTED_PDF_TYPES.includes(e.files?.[0].type), 'Invalid file type')
-// .refine((e: HTMLInputElement) => e.files?.[0].size <= MAX_FILE_SIZE, 'File size is too large. Max file size is 2MB'),
+export type ScheduleInterviewPayload = z.infer<typeof scheduleInterviewSchema>;
+export type ReschedulePayload = z.infer<typeof rescheduleSchema>;

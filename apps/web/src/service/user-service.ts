@@ -1,6 +1,6 @@
 import { authApi } from '@/lib/axios';
 import { ErrorHandler } from '@/lib/error-handler';
-import { IUserProfile, UserExperiencePayload } from '@/model/user';
+import { IAppliedJob, IInterviewJob, IUserProfile, UserExperiencePayload } from '@/model/user';
 import { UserEducationSchema, UserProfilePayloadSchema } from '@/schema/user-schema';
 import { ResponseSuccess } from '@/types';
 
@@ -62,6 +62,24 @@ export const userService = {
   profileCompleteness: async (): Promise<{ strength: number; empty: string[] }> => {
     try {
       const res = await authApi.get('/user/profile/completeness');
+      return res.data.data;
+    } catch (error) {
+      throw new ErrorHandler(error);
+    }
+  },
+
+  getAppliedJobs: async (): Promise<IAppliedJob[]> => {
+    try {
+      const res = await authApi.get('/user/activity/applied');
+      return res.data.data;
+    } catch (error) {
+      throw new ErrorHandler(error);
+    }
+  },
+
+  getInterviewsJobs: async (): Promise<IInterviewJob[]> => {
+    try {
+      const res = await authApi.get('/user/activity/interview');
       return res.data.data;
     } catch (error) {
       throw new ErrorHandler(error);

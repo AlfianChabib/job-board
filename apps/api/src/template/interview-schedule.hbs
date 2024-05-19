@@ -1,0 +1,43 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <style>
+      body { font-family: Arial, Helvetica, sans-serif; background-color: #fff;} * { box-sizing: border-box; }
+    </style>
+    <title>
+      Interview Schedule
+    </title>
+  </head>
+  <body>
+    <div style='max-width: 700px; margin: 0 auto; padding: 0.5rem; background-color: #e5e5e5; color: #6E56CF;'>
+      <h1 style='text-align: center;'>
+        Interview Scheduling
+      </h1>
+      <div style='text-align: center; background: #6E56CF; color: #fff; padding: 0.5rem; border-radius: 5px;'>
+        <h2>
+          Company {{companyName}} has sent a {{job}} job interview date on {{scheduleDate}}, do you agree?
+        </h2>
+        <div>
+          <a
+            href='{{acceptUrl}}'
+            style='padding: 10px 20px; background-color: #0ee72f; color: #ffffff; border-radius: 5px; text-decoration: none;
+            margin-right: 10px; font-size: medium; font-weight: 600;'
+          >
+            Aggree
+          </a>
+          <a
+            href='{{rescheduleUrl}}'
+            style='padding: 10px 20px; background-color: #fff; color: #6E56CF; border-radius: 5px; text-decoration: none;
+            margin-right: 10px; font-size: medium; font-weight: 600;'
+          >
+            Reschedule
+          </a>
+        </div>
+        <p style='margin-top: 20px;'>
+          Note : If this email is not responded to within five days then your job application will be cancelled
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

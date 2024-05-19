@@ -59,6 +59,16 @@ export class CompanyService {
     await prisma.companyProfile.update({ where: { userId }, data: { logo } });
   }
 
+  static async getCandidates(userId: number) {
+    const existCompany = await prisma.companyProfile.findUnique({ where: { userId } });
+    if (!existCompany) throw new Error('Company not found');
+
+    return prisma.application.findMany({
+      where: { Job: { companyProfileId: existCompany.id } },
+      include: { Job: true, UserProfile: { include: { userSkill: true, userEducation: true, userExperience: true } } },
+    });
+  }
+
   static async companyProfileCompleteness(userId: number) {
     const data = await prisma.companyProfile.findUnique({
       where: { userId },
@@ -66,5 +76,28 @@ export class CompanyService {
     if (!data) throw new ResponseError(404, 'Company not found');
 
     return companyCompleteness(data);
+  }
+
+  static async getInterviews(userId: number) {
+    const company = await prisma.companyProfile.findUnique({ where: { userId } });
+    if (!company) throw new ResponseError(404, 'Company not found');
+    const data = await prisma.interview.findMany({
+      where: { Application: { Job: { companyProfileId: company.id } } },
+      include: { Application: { include: { Job: true, UserProfile: true } } },
+    });
+
+    return data;
+  }
+
+  static async getCandidateProfile(userId: number, candidateProfileId: number) {
+    const existCompany = await prisma.companyProfile.findUnique({ where: { userId } });
+    if (!existCompany) throw new ResponseError(404, 'Company not found');
+
+    const data = await prisma.userProfile.findUnique({
+      where: { id: candidateProfileId },
+      include: { userSkill: true, userEducation: true, userExperience: true },
+    });
+
+    return data;
   }
 }

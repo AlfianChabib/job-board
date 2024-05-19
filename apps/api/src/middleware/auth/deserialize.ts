@@ -21,17 +21,22 @@ export const deserializeUser = async (req: Request, res: Response, next: NextFun
     if (accessToken === undefined) {
       return next();
     }
-    jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET, function (err, decoded) {
-      if (err instanceof jwt.TokenExpiredError) {
-        if (err.name === 'TokenExpiredError') {
-          throw new ResponseError(403, 'Token expired');
+    jwt.verify(
+      accessToken,
+      process.env.JWT_ACCESS_SECRET,
+      function (err, decoded: string | jwt.JwtPayload | undefined | AuthJWTPayload) {
+        if (err instanceof jwt.TokenExpiredError) {
+          if (err.name === 'TokenExpiredError') {
+            throw new ResponseError(403, 'Token expired');
+          }
+          throw new ResponseError(401, 'Invalid token');
+        } else {
+          res.locals.session = decoded;
+          req.user = decoded as AuthJWTPayload;
+          next();
         }
-        throw new ResponseError(401, 'Invalid token');
-      } else {
-        req.user = decoded as AuthJWTPayload;
-        next();
-      }
-    });
+      },
+    );
   } catch (error) {
     next(error);
   }

@@ -19,6 +19,9 @@ export class CompanyRouter {
     this.router.get('/jobs', this.companyController.getCompanyJobs);
     this.router.get('/statistics', this.companyController.getCompanyStatistics);
     this.router.get('/profile/completeness', this.companyController.getCompanyCompleteness);
+    this.router.get('/candidates', this.companyController.getAllCandidate);
+    this.router.get('/interviews', this.companyController.getAllInterviews);
+    this.router.get('/candidates/:candidateId', this.companyController.getCandiadateProfile);
 
     this.router.patch('/profile/logo', companylogo, this.companyController.updateCompanyLogo);
     this.router.patch(

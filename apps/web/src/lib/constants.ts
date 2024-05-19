@@ -24,14 +24,14 @@ export const companyMenuLinks = [
   { name: 'Account', href: '/company/account', icon: 'CircleUser' },
   { name: 'Dashboard', href: '/company/dashboard', icon: 'LayoutDashboard' },
   { name: 'Jobs', href: '/company/jobs', icon: 'FolderKanban' },
-  { name: 'Application', href: '/company/application', icon: 'Users' },
+  { name: 'Candidate', href: '/company/candidate', icon: 'Users' },
   { name: 'Interview', href: '/company/interview', icon: 'FolderClock' },
 ];
 
 export const userMenuLinks = [
   { name: 'Account', href: '/account', icon: 'CircleUser' },
-  { name: 'Dashboard', href: '/dashboard', icon: 'LayoutDashboard' },
-  { name: 'Jobs', href: '/jobs', icon: 'FolderKanban' },
+  { name: 'Activity', href: '/activity', icon: 'LayoutDashboard' },
+  { name: 'Interview', href: '/activity?tab=interview', icon: 'FolderKanban' },
 ];
 
 export const workType = [

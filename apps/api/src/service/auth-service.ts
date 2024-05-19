@@ -28,7 +28,7 @@ export class AuthService {
         email: payload.email,
         username: payload.username,
         AuthDetail: { create: { email: payload.email, hashPassword: hashedPassword } },
-        UserProfile: { create: { username: payload.username } },
+        UserProfile: { create: { username: payload.username, email: payload.email } },
       },
     });
     const expiryToken = dayjs().add(1, 'hour').toDate();
@@ -60,7 +60,7 @@ export class AuthService {
         username: payload.companyName,
         role: 'Company',
         AuthDetail: { create: { email: payload.email, hashPassword: hashedPassword } },
-        CompanyProfile: { create: { companyName: payload.companyName } },
+        CompanyProfile: { create: { companyName: payload.companyName, email: payload.email } },
       },
     });
     const expiryToken = dayjs().add(1, 'hour').toDate();

@@ -7,6 +7,7 @@ import { ApiRouter } from './routers/api-router';
 import { errorMiddleware } from './middleware/error-middleware';
 import { corsOptions } from './utils/cors-option';
 import { deserializeUser } from './middleware/auth/deserialize';
+import exphbs from 'express-handlebars';
 
 export default class App {
   private app: Express;

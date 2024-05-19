@@ -28,14 +28,14 @@ const FormDate = <TFormValues extends FieldValues>(props: FormDateProps<TFormVal
             <FormLabel>{label}</FormLabel>
             <FormMessage className="text-xs" />
           </div>
-          <Popover>
+          <Popover modal={true}>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
                   variant={'outline'}
                   className={cn('w-full pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
                 >
-                  {field.value ? format(field.value, 'P') : <span>{placeholder}</span>}
+                  {field.value ? format(field.value, 'PPP') : <span>{placeholder}</span>}
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
               </FormControl>

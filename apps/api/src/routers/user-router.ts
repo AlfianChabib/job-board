@@ -33,6 +33,8 @@ export class UserRouter {
       validateRequest(UserValidation.validateAddUserEducation, ValidationType.body),
       this.userController.addUserEducation,
     );
+    this.router.get('/activity/applied', this.userController.getAppliedJobs);
+    this.router.get('/activity/interview', this.userController.getinterviewsJobs);
   }
 
   getRouter(): Router {

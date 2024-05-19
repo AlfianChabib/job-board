@@ -1,6 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import { AuthService } from '../service/auth-service';
-import { LoginPayload, RegisterCompanyPayload, RegisterUserPayload, RegisterVerifyPayload } from '../model/auth-model';
+import {
+  AuthJWTPayload,
+  LoginPayload,
+  RegisterCompanyPayload,
+  RegisterUserPayload,
+  RegisterVerifyPayload,
+} from '../model/auth-model';
 import { logger } from '../utils/logging';
 import { ResponseError } from '../helper/response/error-response';
 import { hashToken } from '../helper/crypto/hash-token';
@@ -101,7 +107,7 @@ export class AuthController {
   async logout(req: Request, res: Response, next: NextFunction) {
     try {
       const { refreshToken } = req.cookies;
-      const { userId } = req.user;
+      const { userId } = req.user as AuthJWTPayload;
       if (!refreshToken) throw new ResponseError(401, 'Refresh token not found');
 
       await AuthService.logOut(userId, hashToken(refreshToken));
@@ -113,11 +119,12 @@ export class AuthController {
     }
   }
 
-  async session(req: Request, res: Response, next: NextFunction) {
+  async session(req: Request extends { user: AuthJWTPayload } ? Request : any, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.user;
+      const session = req.user;
+      console.log(res.locals.session);
 
-      const data = await AuthService.getSession(userId);
+      const data = await AuthService.getSession(session.userId);
       return res.status(201).json({ success: true, message: 'Session success', data });
     } catch (error) {
       next(error);

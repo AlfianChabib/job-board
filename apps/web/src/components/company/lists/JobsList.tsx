@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import JobsTable from './jobs-table';
+import JobsTable from '../table/jobs-table';
 import Loading from '@/app/(root)/loading';
 import { jobsColumns } from './columns';
 import { companyService } from '@/service/company-service';

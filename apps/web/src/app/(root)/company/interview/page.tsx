@@ -1,4 +1,5 @@
 import MaxWidthWrapper from '@/components/base/MaxWidthWrapper';
+import InterviewList from '@/components/company/lists/InterviewList';
 import { buttonVariants } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -16,6 +17,7 @@ export default function Interview() {
           </Link>
         </div>
       </div>
+      <InterviewList />
     </MaxWidthWrapper>
   );
 }

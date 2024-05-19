@@ -1,3 +1,5 @@
+import { Job } from './job';
+
 export type IUserProfile = {
   address: string;
   email: string;
@@ -47,4 +49,37 @@ export interface IUserEducation {
   finishedYear: string;
   institution: string;
   isComplete: boolean;
+}
+
+export interface IAppliedJob {
+  Job: Job;
+  id: number;
+  interview: IInterview | null;
+  jobId: number;
+  resume: string;
+  status: string;
+  userProfileId: number;
+}
+
+export interface IInterview {
+  applicationId: number;
+  id: number;
+  interviewLocation: string;
+  interviewSchedule: Date;
+  interviewStatus: string;
+  interviewType: string;
+  interviewUrl: string;
+  rescheduleInterview: Date;
+}
+
+export interface IInterviewJob {
+  Application: IAppliedJob;
+  applicationId: number;
+  id: number;
+  interviewLocation: string;
+  interviewSchedule: Date;
+  interviewStatus: string;
+  interviewType: string;
+  interviewUrl: string;
+  rescheduleInterview: null;
 }

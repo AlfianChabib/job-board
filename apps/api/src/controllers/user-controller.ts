@@ -2,12 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 import { UserService } from '../service/user-service';
 import { ResponseError } from '../helper/response/error-response';
 import { UpdateProfilePayload } from '../model/user-model';
+import { AuthJWTPayload } from '../model/auth-model';
 
 export class UserController {
   async getProfile(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.user;
-      console.log(userId);
+      const { userId } = req.user as AuthJWTPayload;
 
       const data = await UserService.getUserProfile(userId);
       if (!data) throw new ResponseError(404, 'Get profile failed');
@@ -20,7 +20,7 @@ export class UserController {
 
   async updateProfile(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.user;
+      const { userId } = req.user as AuthJWTPayload;
       const data = req.body as UpdateProfilePayload;
 
       await UserService.updateProfile(userId, data);
@@ -33,7 +33,7 @@ export class UserController {
 
   async addUserSkill(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.user;
+      const { userId } = req.user as AuthJWTPayload;
       const { skill } = req.body;
 
       await UserService.addUserSkill(userId, skill);
@@ -46,7 +46,7 @@ export class UserController {
 
   async deleteUserSkill(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.user;
+      const { userId } = req.user as AuthJWTPayload;
       const { skillId } = req.params;
 
       await UserService.deleteUserSkill(userId, parseInt(skillId, 10));
@@ -59,7 +59,7 @@ export class UserController {
 
   async addUserExperience(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.user;
+      const { userId } = req.user as AuthJWTPayload;
       const data = req.body;
 
       await UserService.addUserExperience(userId, data);
@@ -72,7 +72,7 @@ export class UserController {
 
   async addUserEducation(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.user;
+      const { userId } = req.user as AuthJWTPayload;
       const data = req.body;
 
       await UserService.addUserEducation(userId, data);
@@ -85,9 +85,32 @@ export class UserController {
 
   async profileCompleteness(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.user;
+      const { userId } = req.user as AuthJWTPayload;
       const data = await UserService.profileCompleteness(userId);
       return res.status(201).json({ success: true, message: 'Get profile completeness success', data });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getAppliedJobs(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.user as AuthJWTPayload;
+
+      const data = await UserService.getAppliedJobs(userId);
+
+      return res.status(201).json({ success: true, message: 'Get applied jobs success', data });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getinterviewsJobs(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.user as AuthJWTPayload;
+      const data = await UserService.getInterviewsJobs(userId);
+
+      return res.status(201).json({ success: true, message: 'Get interviews jobs success', data });
     } catch (error) {
       next(error);
     }

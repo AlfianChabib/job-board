@@ -1,8 +1,23 @@
+'use client';
+
 import MaxWidthWrapper from '@/components/base/MaxWidthWrapper';
 import { buttonVariants } from '@/components/ui/button';
+import { companyService } from '@/service/company-service';
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import Loading from '../../loading';
+import CandidateList from '@/components/company/lists/CandidateList';
 
-export default function Application() {
+export default function Candidate() {
+  const { data: candidates, isLoading } = useQuery({
+    queryKey: ['candidates'],
+    queryFn: () => companyService.getCandidates(),
+  });
+
+  if (isLoading) return <Loading />;
+
+  console.log(candidates);
+
   return (
     <MaxWidthWrapper className="min-h-default">
       <div className="flex flex-col">
@@ -16,6 +31,7 @@ export default function Application() {
           </Link>
         </div>
       </div>
+      <CandidateList />
     </MaxWidthWrapper>
   );
 }

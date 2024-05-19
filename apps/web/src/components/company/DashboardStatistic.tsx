@@ -21,7 +21,7 @@ export default function DashboardStatistic() {
           <span className="text-6xl font-semibold">{statistics?.totalJobs}</span>
           <p className="text-sm">Jobs Posted</p>
         </StatisticCard>
-        <StatisticCard title="Total Application" link="/company/application">
+        <StatisticCard title="Total Candidate" link="/company/candidate">
           <span className="text-6xl font-semibold">{statistics?.totalApplications}</span>
           <p className="text-sm">Candidate Applied</p>
         </StatisticCard>
