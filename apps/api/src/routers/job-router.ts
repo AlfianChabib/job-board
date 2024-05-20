@@ -29,6 +29,7 @@ export class JobRouter {
 
     this.router.get('/feature', parsedJobQuery, this.jobController.jobListFeature);
     this.router.get('/:jobId', this.jobController.getJob);
+    this.router.get('/applied/:jobId', Authorization.user, this.jobController.getAppliedJob);
   }
 
   getRouter(): Router {

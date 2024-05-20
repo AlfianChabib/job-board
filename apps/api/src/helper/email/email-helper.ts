@@ -17,6 +17,8 @@ interface IEmailPayload {
   scheduleDate?: string;
   companyName?: string;
   job?: string;
+  rescheduleUrl?: string;
+  acceptUrl?: string;
 }
 
 export async function sendEmail(type: EmailType, payload: IEmailPayload) {
@@ -34,6 +36,8 @@ export async function sendEmail(type: EmailType, payload: IEmailPayload) {
         scheduleDate: payload.scheduleDate,
         companyName: payload.companyName,
         job: payload.job,
+        rescheduleUrl: payload.rescheduleUrl,
+        acceptUrl: payload.acceptUrl,
       }),
     });
   } catch (error) {

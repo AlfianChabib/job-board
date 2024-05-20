@@ -34,6 +34,17 @@ export class JobService {
     });
   }
 
+  static async appliedJob(jobId: number, userId: number) {
+    const applied = await prisma.application.findFirst({
+      where: {
+        UserProfile: { userId },
+        jobId,
+      },
+    });
+
+    return applied;
+  }
+
   static async getCompanyJobs(userId: number) {
     const existCompany = await prisma.companyProfile.findUnique({ where: { userId } });
 

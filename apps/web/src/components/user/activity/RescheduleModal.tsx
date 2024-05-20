@@ -60,7 +60,6 @@ export default function RescheduleModal({ interviewId }: RescheduleModalProps) {
   const handleSubmit = (payload: ReschedulePayload) => {
     setLoading(true);
     mutate(payload);
-    console.log(payload);
   };
 
   return (

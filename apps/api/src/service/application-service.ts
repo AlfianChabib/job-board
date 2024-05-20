@@ -46,18 +46,11 @@ export class ApplicationService {
     if (!company) throw new ResponseError(404, 'Company not found');
     const application = await prisma.application.findUnique({
       where: { id: payload.applicationId },
-      include: { UserProfile: true, Job: true },
+      include: { UserProfile: true, Job: true, interview: true },
     });
     if (!application) throw new ResponseError(404, 'Application not found');
 
-    const sendSchedule = await sendEmail(EmailType.INTERVIEW_SCHEDULE, {
-      email: application.UserProfile?.email as string,
-      companyName: company.companyName as string,
-      scheduleDate: new Date(payload.interviewSchedule).toDateString(),
-      job: application.Job?.title as string,
-    });
-
-    return await prisma.application.update({
+    const createInterview = await prisma.application.update({
       where: { id: payload.applicationId },
       data: {
         status: 'Interview',
@@ -71,6 +64,17 @@ export class ApplicationService {
           },
         },
       },
+      include: { interview: true },
+    });
+
+    await sendEmail(EmailType.INTERVIEW_SCHEDULE, {
+      email: application.UserProfile?.email as string,
+      companyName: company.companyName as string,
+      scheduleDate: new Date(payload.interviewSchedule).toDateString(),
+      job: application.Job?.title as string,
+      rescheduleUrl:
+        process.env.BASE_FRONTEND_URL + '/activity?tab=interview&interviewId=' + createInterview.interview?.id,
+      acceptUrl: process.env.BASE_FRONTEND_URL + '/activity?tab=interview&agreeId=' + createInterview.interview?.id,
     });
   }
 
@@ -114,9 +118,11 @@ export class ApplicationService {
     const user = await prisma.userProfile.findUnique({ where: { userId } });
     if (!user) throw new ResponseError(404, 'User not found');
 
+    console.log(interviewId);
     const interview = await prisma.interview.findUnique({ where: { id: interviewId } });
 
     if (!interview) throw new ResponseError(404, 'Interview not found');
+
     await prisma.interview.update({
       where: { id: interviewId },
       data: { interviewStatus: 'Rescheduling', rescheduleInterview: new Date(payload.rescheduleDate) },

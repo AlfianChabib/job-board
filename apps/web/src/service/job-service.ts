@@ -1,6 +1,7 @@
 import { api, authApi } from '@/lib/axios';
 import { ErrorHandler } from '@/lib/error-handler';
 import { queryBuilder } from '@/lib/query-builder';
+import { Application } from '@/model/company';
 import { Job } from '@/model/job';
 import { PostJobSchema } from '@/schema/job-schema';
 import { QueryParams, ResponseSuccess } from '@/types';
@@ -50,6 +51,15 @@ export const jobService = {
     try {
       const query = queryBuilder(payload);
       const res = await api.get('/jobs/feature?' + query);
+      return res.data.data;
+    } catch (error) {
+      throw new ErrorHandler(error);
+    }
+  },
+
+  getAppliedJob: async (jobId: number): Promise<Application> => {
+    try {
+      const res = await authApi.get('/jobs/applied/' + jobId);
       return res.data.data;
     } catch (error) {
       throw new ErrorHandler(error);

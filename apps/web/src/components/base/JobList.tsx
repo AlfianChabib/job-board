@@ -24,8 +24,6 @@ export default function JobList() {
     queryFn: () => jobService.jobsListFeature({ page, keywords, location, classificationId, jobType, limit, sort }),
   });
 
-  console.log(jobs);
-
   const handleClick = (jobId: number) => {
     if (window.innerWidth < 768) {
       router.push(`/job-details/${jobId}`);

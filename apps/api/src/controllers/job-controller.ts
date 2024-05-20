@@ -14,6 +14,17 @@ export class JobController {
     }
   }
 
+  async getAppliedJob(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { jobId } = req.params;
+      const { userId } = req.user as AuthJWTPayload;
+      const data = await JobService.appliedJob(parseInt(jobId, 10), userId);
+      return res.status(201).json({ success: true, message: 'Get applied job success', data });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async getCompanyJobs(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.user as AuthJWTPayload;

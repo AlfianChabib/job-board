@@ -26,13 +26,18 @@ export default function JobDetails({ jobId }: JobDetailsProps) {
     enabled: session?.isAuthenticated || session?.role === 'User',
   });
 
+  const { data: isApplied } = useQuery({
+    queryKey: ['is-applied', jobId],
+    queryFn: () => jobService.getAppliedJob(parseInt(jobId, 10)),
+    enabled: session?.isAuthenticated,
+  });
+
   const { data: job, isLoading } = useQuery({
     queryKey: ['job-details', jobId],
     queryFn: () => jobService.getJobId(jobId),
   });
 
   const handleApply = (jobId: number) => {
-    console.log('apply');
     if (session?.isAuthenticated === false) {
       router.push('/login/user');
     } else if (profileCompleteness && profileCompleteness.strength < 6) {
@@ -77,9 +82,17 @@ export default function JobDetails({ jobId }: JobDetailsProps) {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <Button className="w-40" onClick={() => handleApply(job.id)}>
-                Apply
-              </Button>
+              {!isApplied ? (
+                <Button className="w-40" onClick={() => handleApply(job.id)}>
+                  Apply
+                </Button>
+              ) : isApplied.status === 'Unsuccessful' ? (
+                <Button className="w-40" onClick={() => handleApply(job.id)}>
+                  Apply
+                </Button>
+              ) : (
+                <p className="text-foreground/70">On Procces</p>
+              )}
               <div className="flex text-foreground/70 items-center text-sm gap-1">
                 <Info size={18} />
                 <p>Expires in {formatLocaleDate(job.registrationDeadline)}</p>
