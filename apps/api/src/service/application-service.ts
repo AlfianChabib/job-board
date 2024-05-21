@@ -36,9 +36,18 @@ export class ApplicationService {
 
     if (!application) throw new ResponseError(404, 'Application not found');
 
-    await prisma.application.update({ where: { id: application.id }, data: { status: 'Accepted' } });
+    const accepted = await prisma.application.update({
+      where: { id: application.id },
+      data: { status: 'Accepted' },
+      include: { Job: { include: { CompanyProfile: true } } },
+    });
+    if (!accepted) throw new ResponseError(500, 'Failed to accept offer');
 
-    await sendEmail(EmailType.ACCEPTED, { email: application.UserProfile?.email as string });
+    await sendEmail(EmailType.ACCEPTED, {
+      email: application.UserProfile?.email as string,
+      job: accepted.Job?.title as string,
+      companyName: accepted.Job?.CompanyProfile?.companyName as string,
+    });
   }
 
   static async scheduleInterview(userId: number, payload: InterviewPayload) {
@@ -118,7 +127,6 @@ export class ApplicationService {
     const user = await prisma.userProfile.findUnique({ where: { userId } });
     if (!user) throw new ResponseError(404, 'User not found');
 
-    console.log(interviewId);
     const interview = await prisma.interview.findUnique({ where: { id: interviewId } });
 
     if (!interview) throw new ResponseError(404, 'Interview not found');
