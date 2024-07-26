@@ -1,8 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import classificationData from './seed/classification.json';
-import skills from './seed/skills.json';
-import { SkillDataSeed } from '../src/model/data-model';
 
 const main = async () => {
   try {
@@ -29,4 +27,7 @@ main()
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);
+  })
+  .finally(async () => {
+    prisma.$disconnect();
   });

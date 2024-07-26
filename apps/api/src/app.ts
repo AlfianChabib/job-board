@@ -7,7 +7,6 @@ import { ApiRouter } from './routers/api-router';
 import { errorMiddleware } from './middleware/error-middleware';
 import { corsOptions } from './utils/cors-option';
 import { deserializeUser } from './middleware/auth/deserialize';
-import exphbs from 'express-handlebars';
 
 export default class App {
   private app: Express;
@@ -20,7 +19,13 @@ export default class App {
   }
 
   private configure(): void {
-    this.app.use(cors(corsOptions));
+    this.app.use(
+      cors({
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true,
+        origin: [process.env.BASE_FRONTEND_URL],
+      }),
+    );
     this.app.use(json());
     this.app.use(cookieParser());
     this.app.use(urlencoded({ extended: true }));
@@ -56,6 +61,7 @@ export default class App {
   public start(): void {
     this.app.listen(PORT, () => {
       console.log(`  ➜  [API] Local:   http://localhost:${process.env.PORT}/`);
+      console.log(process.env.BASE_FRONTEND_URL);
     });
   }
 }
