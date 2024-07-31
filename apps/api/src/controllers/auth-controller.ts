@@ -66,7 +66,7 @@ export class AuthController {
       const resData = await AuthService.loginUser(payload);
       const { refreshToken, accessToken } = await AuthService.createToken(resData);
 
-      await AuthService.sendToken(res, refreshToken);
+      AuthService.sendToken(res, refreshToken);
       return res.status(201).json({ success: true, message: 'Login success', accessToken });
     } catch (error) {
       next(error);

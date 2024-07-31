@@ -210,7 +210,7 @@ model ClassificationInfo {
 
 model Classification {
   id                 Int                  @id @default(autoincrement())
-  title              String
+  title              String               @db.Text
   subClassification  SubClassificaion[]
   ClassificationInfo ClassificationInfo[]
   UserClassification UserClassification[]
@@ -220,7 +220,7 @@ model Classification {
 
 model SubClassificaion {
   id                 Int                  @id @default(autoincrement())
-  title              String
+  title              String               @db.Text
   Classification     Classification?      @relation(fields: [classificationId], references: [id])
   classificationId   Int?
   ClassificationInfo ClassificationInfo[]
@@ -230,7 +230,6 @@ model SubClassificaion {
 }
 
 model Skill {
-  id    Int    @id @default(autoincrement())
-  Text  String @db.LongText
-  Label Int
+  id   Int    @id @default(autoincrement())
+  Text String @db.LongText
 }
