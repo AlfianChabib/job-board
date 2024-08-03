@@ -1,6 +1,14 @@
 {
   "extends": ["//"],
   "pipeline": {
-    "prisma": {}
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "serve": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
   }
 }
