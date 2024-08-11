@@ -61,7 +61,6 @@ export default class App {
   public start(): void {
     this.app.listen(PORT, () => {
       console.log(`  ➜  [API] Local:   http://localhost:${process.env.PORT}/`);
-      console.log(process.env.BASE_FRONTEND_URL);
     });
   }
 }

@@ -45,3 +45,16 @@ export async function sendEmail(type: EmailType, payload: IEmailPayload) {
     throw error;
   }
 }
+
+export async function sendMail(to: string, subject: Record<string, string>, html: string) {
+  try {
+    return await transporter.sendMail({
+      from: 'I-Need <ineed@ineed.my.id>',
+      to,
+      ...subject,
+      html,
+    });
+  } catch (error) {
+    throw error;
+  }
+}

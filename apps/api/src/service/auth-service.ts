@@ -4,7 +4,6 @@ import { hashToken } from '../helper/crypto/hash-token';
 import { genTokenUrl, verifyToken } from '../helper/jsonwebtoken/verify-token';
 import { comparePassword, hashPassword } from '../helper/bcrypt/password-helper';
 import { ResponseError } from '../helper/response/error-response';
-import { EmailType, sendEmail } from '../helper/email/email-helper';
 import {
   AuthJWTPayload,
   LoginPayload,
@@ -16,6 +15,7 @@ import {
 } from '../model/auth-model';
 import { generateTokens, verifyRefreshToken } from '../helper/jsonwebtoken/auth-token';
 import { Response } from 'express';
+import { resend } from '../utils/resend';
 
 export class AuthService {
   static async registerUser(payload: RegisterUserPayload): Promise<{ email: string }> {
@@ -44,7 +44,14 @@ export class AuthService {
       data: { AuthDetail: { update: { verificationCode: hashToken(token) } } },
     });
 
-    await sendEmail(EmailType.VERIFICATION, { email: user.email, url });
+    const { data, error } = await resend.emails.send({
+      to: [user.email],
+      from: 'Ineed <ineed@ineed.my.id>',
+      subject: 'Verify your account',
+      html: `<h1>Verify your account</h1><p>Please click the link below to verify your account</p><a href="${url}">Verify</a>`,
+    });
+
+    console.log(data, error);
 
     return { email: user.email };
   }
@@ -76,7 +83,12 @@ export class AuthService {
       data: { AuthDetail: { update: { verificationCode: hashToken(token) } } },
     });
 
-    await sendEmail(EmailType.VERIFICATION, { email: company.email, url });
+    await resend.emails.send({
+      to: [company.email],
+      from: 'Ineed <ineed@ineed.my.id>',
+      subject: 'Verify your account',
+      html: `<h1>Verify your account</h1><p>Please click the link below to verify your account</p><a href="${url}">Verify</a>`,
+    });
 
     return { email: updatedCompany.email };
   }

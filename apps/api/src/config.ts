@@ -27,6 +27,7 @@ const envSchema = z.object({
   NODEMAILER_USER: z.string().trim(),
   NODEMAILER_HOST: z.string().trim(),
   NODEMAILER_PORT: z.string().trim(),
+  RESEND_API_KEY: z.string().trim(),
 });
 
 const env = envSchema.parse(process.env);
