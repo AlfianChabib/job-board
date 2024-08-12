@@ -15,7 +15,7 @@ import {
 } from '../model/auth-model';
 import { generateTokens, verifyRefreshToken } from '../helper/jsonwebtoken/auth-token';
 import { Response } from 'express';
-import { resend } from '../utils/resend';
+import { EmailType, resendEmail } from '../helper/email/email-helper';
 
 export class AuthService {
   static async registerUser(payload: RegisterUserPayload): Promise<{ email: string }> {
@@ -44,12 +44,7 @@ export class AuthService {
       data: { AuthDetail: { update: { verificationCode: hashToken(token) } } },
     });
 
-    const { data, error } = await resend.emails.send({
-      to: [user.email],
-      from: 'Ineed <ineed@ineed.my.id>',
-      subject: 'Verify your account',
-      html: `<h1>Verify your account</h1><p>Please click the link below to verify your account</p><a href="${url}">Verify</a>`,
-    });
+    await resendEmail(EmailType.VERIFICATION, { email: user.email, url });
 
     return { email: user.email };
   }
@@ -81,12 +76,7 @@ export class AuthService {
       data: { AuthDetail: { update: { verificationCode: hashToken(token) } } },
     });
 
-    await resend.emails.send({
-      to: [company.email],
-      from: 'Ineed <ineed@ineed.my.id>',
-      subject: 'Verify your account',
-      html: `<h1>Verify your account</h1><p>Please click the link below to verify your account</p><a href="${url}">Verify</a>`,
-    });
+    await resendEmail(EmailType.VERIFICATION, { email: company.email, url });
 
     return { email: updatedCompany.email };
   }

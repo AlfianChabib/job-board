@@ -11,11 +11,13 @@ import CompanyMenu from './CompanyMenu';
 export default function Header() {
   const { data: session } = useSession();
 
+  const defaultHome = session?.role === 'Company' ? '/company/dashboard' : '/';
+
   return (
     <header className="sticky inset-x-0 top-0 z-50 h-14 w-full border-b border-slate-200 bg-white/60 backdrop-blur-md transition-all">
       <MaxWidthWrapper className="h-full">
         <nav className="flex h-full items-center">
-          <Link href="/" className="text-base text-primary hover:text-muted-foreground">
+          <Link href={defaultHome} className="text-base text-primary hover:text-muted-foreground">
             <h1 className="text-2xl font-bold">I-Need</h1>
           </Link>
           <div className="ml-auto flex items-center space-x-4">

@@ -3,7 +3,7 @@ export type SessionData = {
   userId: number;
   username: string;
   email: string;
-  role: string;
+  role: 'JobSeeker' | 'Company';
   image: string | null;
 };
 

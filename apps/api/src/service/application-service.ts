@@ -1,4 +1,4 @@
-import { EmailType, sendEmail } from '../helper/email/email-helper';
+import { EmailType, resendEmail } from '../helper/email/email-helper';
 import { ResponseError } from '../helper/response/error-response';
 import { InterviewPayload, ReschedulePayload } from '../model/application-model';
 import { prisma } from '../prisma';
@@ -78,14 +78,7 @@ export class ApplicationService {
       include: { interview: true },
     });
 
-    await resend.emails.send({
-      to: [application.UserProfile?.email as string],
-      from: 'Ineed <ineed@ineed.my.id>',
-      subject: 'Interview schedule',
-      html: `<h1>Interview schedule</h1><p>Your interview schedule has been sent</p>`,
-    });
-
-    await sendEmail(EmailType.INTERVIEW_SCHEDULE, {
+    await resendEmail(EmailType.INTERVIEW_SCHEDULE, {
       email: application.UserProfile?.email as string,
       companyName: company.companyName as string,
       scheduleDate: new Date(payload.interviewSchedule).toDateString(),

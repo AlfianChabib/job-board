@@ -29,15 +29,15 @@ export class CompanyService {
 
     if (!existCompany) throw new ResponseError(404, 'Company not found');
 
-    const totalJobs = await prisma.job.count({ where: { companyProfileId: userId } });
+    const totalJobs = await prisma.job.count({ where: { companyProfileId: existCompany.id } });
     const totalApplications = await prisma.application.count({
-      where: { Job: { companyProfileId: existCompany?.id } },
+      where: { Job: { companyProfileId: existCompany.id } },
     });
     const totalInterviews = await prisma.interview.count({
-      where: { Application: { Job: { companyProfileId: existCompany?.id } } },
+      where: { Application: { Job: { companyProfileId: existCompany.id } } },
     });
 
-    return { totalJobs, totalApplications, totalInterviews, companyId: existCompany?.id };
+    return { totalJobs, totalApplications, totalInterviews, companyId: existCompany.id };
   }
 
   static async getCompanyProfile(userId: number) {

@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 import * as path from 'path';
 import fs from 'fs';
-import { transporter } from '../../utils/nodemailer';
+import { resend } from '../../utils/resend';
 
 export enum EmailType {
   NOTIFICATION = 'notification',
@@ -21,14 +21,14 @@ interface IEmailPayload {
   acceptUrl?: string;
 }
 
-export async function sendEmail(type: EmailType, payload: IEmailPayload) {
+export async function resendEmail(type: EmailType, payload: IEmailPayload) {
   try {
     const html = fs.readFileSync(path.join(__dirname, `../../template/${type}.hbs`), 'utf-8');
     const template = Handlebars.compile(html);
 
-    return await transporter.sendMail({
-      from: 'I-Need <alfianchabib109@gmail.com>',
+    return await resend.emails.send({
       to: payload.email,
+      from: 'I-Need <ineed@ineed.my.id>',
       subject: `I-Need ${type}`,
       html: template({
         email: payload.email,
@@ -39,19 +39,6 @@ export async function sendEmail(type: EmailType, payload: IEmailPayload) {
         rescheduleUrl: payload.rescheduleUrl,
         acceptUrl: payload.acceptUrl,
       }),
-    });
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function sendMail(to: string, subject: Record<string, string>, html: string) {
-  try {
-    return await transporter.sendMail({
-      from: 'I-Need <ineed@ineed.my.id>',
-      to,
-      ...subject,
-      html,
     });
   } catch (error) {
     throw error;
