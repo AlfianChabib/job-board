@@ -4,14 +4,12 @@ import AlertMessage from '@/components/elements/AlertMessage';
 import FormInput from '@/components/elements/FormInput';
 import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginSchema } from '@/schema/auth-schema';
 import { Button } from '@/components/ui/button';
 import { authService } from '@/service/auth-service';
 import { useRouter } from 'next/navigation';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useLoading } from '@/hooks/use-loading';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlertMessage } from '@/hooks/use-alert-message';
 
 interface SignInFormProps {
@@ -19,7 +17,6 @@ interface SignInFormProps {
 }
 
 export default function SignInForm(props: SignInFormProps) {
-  const { loading, setLoading } = useLoading();
   const { alertMessage, setAlertMessage } = useAlertMessage();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -29,24 +26,21 @@ export default function SignInForm(props: SignInFormProps) {
     defaultValues: { email: '', password: '' },
   });
 
-  const onSignInSuccess = (res: any) => {
-    queryClient.invalidateQueries({ queryKey: ['session'] });
-    localStorage.setItem('accessToken', res.accessToken);
-    setAlertMessage({ title: 'Success', message: res.message, type: 'success' });
-    router.push(`/${props.type === 'user' ? '' : 'company/dashboard'}`);
-  };
+  const { mutateAsync: signIn, isPending } = useMutation({
+    mutationFn: (data: LoginSchema) => authService.signIn(data, props.type),
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ['session'] });
+      localStorage.setItem('accessToken', res.accessToken);
+      setAlertMessage({ title: 'Success', message: res.message, type: 'success' });
+      router.push(props.type === 'user' ? '/' : '/company/dashboard');
+    },
+    onError: (error) => {
+      setAlertMessage({ title: 'Error', message: error.message, type: 'error' });
+    },
+  });
 
   const onSubmit = (value: LoginSchema) => {
-    setLoading(true);
-    authService
-      .signIn(value, props.type)
-      .then((res: any) => {
-        onSignInSuccess(res);
-      })
-      .catch((error) => {
-        setAlertMessage({ title: 'Error', message: error.message, type: 'error' });
-      })
-      .finally(() => setLoading(false));
+    signIn(value);
   };
 
   return (
@@ -68,7 +62,7 @@ export default function SignInForm(props: SignInFormProps) {
             aria-label="Password"
             placeholder="your secret password"
           />
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" disabled={isPending}>
             Sign in
           </Button>
         </form>
