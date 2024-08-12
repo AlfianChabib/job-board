@@ -5,7 +5,7 @@ export const initialSession: SessionData = {
   userId: 0,
   username: '',
   email: '',
-  role: '',
+  role: 'JobSeeker',
   image: null,
 };
 

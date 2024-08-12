@@ -23,7 +23,7 @@ export default function JobDetails({ jobId }: JobDetailsProps) {
   const { data: profileCompleteness } = useQuery({
     queryKey: ['profile-completeness'],
     queryFn: userService.profileCompleteness,
-    enabled: session?.isAuthenticated || session?.role === 'User',
+    enabled: session?.isAuthenticated || session?.role === 'JobSeeker',
   });
 
   const { data: isApplied } = useQuery({
