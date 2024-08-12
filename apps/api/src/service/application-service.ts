@@ -2,6 +2,7 @@ import { EmailType, sendEmail } from '../helper/email/email-helper';
 import { ResponseError } from '../helper/response/error-response';
 import { InterviewPayload, ReschedulePayload } from '../model/application-model';
 import { prisma } from '../prisma';
+import { resend } from '../utils/resend';
 
 export class ApplicationService {
   static async apply(userId: number, jobId: number, filePath: string) {
@@ -43,10 +44,11 @@ export class ApplicationService {
     });
     if (!accepted) throw new ResponseError(500, 'Failed to accept offer');
 
-    await sendEmail(EmailType.ACCEPTED, {
-      email: application.UserProfile?.email as string,
-      job: accepted.Job?.title as string,
-      companyName: accepted.Job?.CompanyProfile?.companyName as string,
+    await resend.emails.send({
+      to: [application.UserProfile?.email as string],
+      from: 'Ineed <ineed@ineed.my.id>',
+      subject: 'Application accepted',
+      html: `<h1>Application accepted</h1><p>Your application has been accepted</p>`,
     });
   }
 
@@ -74,6 +76,13 @@ export class ApplicationService {
         },
       },
       include: { interview: true },
+    });
+
+    await resend.emails.send({
+      to: [application.UserProfile?.email as string],
+      from: 'Ineed <ineed@ineed.my.id>',
+      subject: 'Interview schedule',
+      html: `<h1>Interview schedule</h1><p>Your interview schedule has been sent</p>`,
     });
 
     await sendEmail(EmailType.INTERVIEW_SCHEDULE, {

@@ -23,7 +23,6 @@ export default function RegisterCompanyForm() {
 
   const onSubmit = (value: RegisterCompanySchema) => {
     setLoading(true);
-    console.log(value);
     authService
       .registerCompany(value)
       .then((res) => {

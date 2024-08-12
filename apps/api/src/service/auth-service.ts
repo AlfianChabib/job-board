@@ -51,8 +51,6 @@ export class AuthService {
       html: `<h1>Verify your account</h1><p>Please click the link below to verify your account</p><a href="${url}">Verify</a>`,
     });
 
-    console.log(data, error);
-
     return { email: user.email };
   }
 

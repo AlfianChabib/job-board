@@ -122,7 +122,6 @@ export class AuthController {
   async session(req: Request extends { user: AuthJWTPayload } ? Request : any, res: Response, next: NextFunction) {
     try {
       const session = req.user;
-      console.log(res.locals.session);
 
       const data = await AuthService.getSession(session.userId);
       return res.status(201).json({ success: true, message: 'Session success', data });

@@ -19,8 +19,6 @@ export default function UserAccount() {
 
   if (isLoading) return <Loading />;
 
-  console.log(userProfile);
-
   return (
     <MaxWidthWrapper className="min-h-default">
       <div className="flex flex-col mx-auto md:my-4 my-2 max-w-[750px] md:gap-4 gap-2">

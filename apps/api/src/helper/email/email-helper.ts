@@ -41,7 +41,6 @@ export async function sendEmail(type: EmailType, payload: IEmailPayload) {
       }),
     });
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }

@@ -98,7 +98,6 @@ export class JobController {
 
       return res.status(201).json({ success: true, message: 'Success', data });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

@@ -38,8 +38,6 @@ export default function InterviewTableRowActions<TData>({
 }: InterviewTableRowActionsProps<TData>) {
   const queryClient = useQueryClient();
 
-  console.log(candidateName);
-
   const { mutate: acceptReschedule } = useMutation({
     mutationFn: (interviewId: number) => {
       return applicationService.acceptRescheduleCompany(interviewId);

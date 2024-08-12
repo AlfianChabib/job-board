@@ -16,8 +16,6 @@ export default function Candidate() {
 
   if (isLoading) return <Loading />;
 
-  console.log(candidates);
-
   return (
     <MaxWidthWrapper className="min-h-default">
       <div className="flex flex-col">

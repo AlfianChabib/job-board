@@ -48,7 +48,6 @@ export default function EducationForm() {
 
   const onSubmit = (data: UserEducationSchema) => {
     setLoading(true);
-    console.log(data);
     mutate(data);
   };
 

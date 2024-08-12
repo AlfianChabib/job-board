@@ -56,7 +56,6 @@ export class CompanyController {
       const { file } = req;
 
       const fileUrl = process.env.BASE_API_URL + file?.path;
-      console.log(req.file);
 
       await CompanyService.updateCompanyLogo(userId, fileUrl);
 

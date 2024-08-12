@@ -23,9 +23,7 @@ async function main() {
     });
 
     Promise.all([classificationSeed, skillSeed]);
-  } catch (error) {
-    console.log('Seeding Classification Data Error: ', error);
-  }
+  } catch (error) {}
 }
 
 main()

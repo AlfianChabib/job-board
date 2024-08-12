@@ -13,8 +13,6 @@ export default function AppliedList() {
 
   if (isLoading) return <Loading />;
 
-  console.log(appliedJobs);
-
   return (
     <div className="flex flex-col md:gap-4 gap-2 my-4">
       {appliedJobs?.map((applied, index) => (
