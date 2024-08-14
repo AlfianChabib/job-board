@@ -182,9 +182,10 @@ export class AuthService {
   static async sendToken(res: Response, refreshToken: string) {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
+      domain: process.env.NODE_ENV === 'production' ? '.ineed.my.id' : 'localhost',
       secure: process.env.NODE_ENV === 'production',
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      sameSite: 'lax',
+      sameSite: 'none',
       path: '/',
     });
   }

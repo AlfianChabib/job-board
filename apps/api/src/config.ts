@@ -23,10 +23,6 @@ const envSchema = z.object({
   JWT_REFRESH_SECRET: z.string().trim(),
   JWT_VERIFIVATION_SECRET: z.string().trim(),
   JWT_VERIFIVATION_LIFETIME: z.string().trim(),
-  NODEMAILER_PASS: z.string().trim(),
-  NODEMAILER_USER: z.string().trim(),
-  NODEMAILER_HOST: z.string().trim(),
-  NODEMAILER_PORT: z.string().trim(),
   RESEND_API_KEY: z.string().trim(),
 });
 

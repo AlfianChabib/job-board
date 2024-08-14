@@ -1,0 +1,8 @@
+FROM mysql:8.0
+
+ENV MYSQL_ROOT_PASSWORD=password
+ENV MYSQL_DATABASE=shoesmart-docker
+ENV MYSQL_USER=root
+ENV MYSQL_PASSWORD=password
+
+EXPOSE 1234

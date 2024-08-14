@@ -1,0 +1,52 @@
+name: job-board-app
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - mysql-db:/var/lib/mysql
+    networks:
+      - ineed_network
+
+  web:
+    container_name: web
+    depends_on:
+      - api
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - ineed_network
+
+  api:
+    container_name: api
+    env_file:
+      - ./apps/api/.env
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+    restart: always
+    ports:
+      - 8000:8000
+    networks:
+      - ineed_network
+
+volumes:
+  mysql-db:
+
+networks:
+  ineed_network:
+    external: true

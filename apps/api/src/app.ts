@@ -7,6 +7,7 @@ import { ApiRouter } from './routers/api-router';
 import { errorMiddleware } from './middleware/error-middleware';
 import { corsOptions } from './utils/cors-option';
 import { deserializeUser } from './middleware/auth/deserialize';
+import helmet from 'helmet';
 
 export default class App {
   private app: Express;
@@ -20,10 +21,21 @@ export default class App {
 
   private configure(): void {
     this.app.use(
+      helmet({
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", 'job-board-web.vercel.app'],
+          },
+        },
+      }),
+    );
+    this.app.use(
       cors({
-        allowedHeaders: ['Content-Type', 'Authorization'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'Origin'],
         credentials: true,
         origin: [process.env.BASE_FRONTEND_URL],
+        exposedHeaders: ['Set-Cookie'],
       }),
     );
     this.app.use(json());
@@ -43,6 +55,7 @@ export default class App {
       }
     });
     this.app.use((req: Request, res: Response, next: NextFunction) => {
+      console.log(req.headersDistinct);
       if (req.path.includes('/api/')) {
         res.status(404).send('Not found !');
       } else {
